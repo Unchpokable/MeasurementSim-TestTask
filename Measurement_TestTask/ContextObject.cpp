@@ -1,13 +1,18 @@
 ﻿#include "ContextObject.h"
 
-bool ContextObject::IsEquals(const ContextObject& other)
+bool ContextObject::IsEquals(const ContextObject& other) const noexcept
 {
-    return m_object_name == other.m_object_name;
+    return m_object_name == other.m_object_name && m_type == other.m_type;
 }
 
 
-QString ContextObject::Name()
+QString ContextObject::GetName() const noexcept
 {
     return m_object_name;
+}
+
+ContextObjectType ContextObject::GetType() const noexcept
+{
+    return m_type;
 }
 
