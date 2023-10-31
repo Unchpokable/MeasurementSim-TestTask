@@ -1,5 +1,5 @@
 #pragma once
-#include <QString>
+
 #include "Callbacks.h"
 #include "ContextObject.h"
 
@@ -24,7 +24,7 @@ public:
     void ClearCallbackList();
 
 protected:
-    void Emit(const QString& arg);
+    void Emit(const QString& arg) const noexcept;
     std::vector<SingleArgumentCallback<QString>>* m_callback_list;
 };
 

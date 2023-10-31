@@ -41,11 +41,9 @@ void CommandBase::ClearCallbackList()
     m_callback_list->clear();
 }
 
-void CommandBase::Emit(const QString& arg)
+void CommandBase::Emit(const QString& arg) const noexcept
 {
     for(auto func : *m_callback_list)
         if(func != nullptr)
             func(arg);
 }
-
-
