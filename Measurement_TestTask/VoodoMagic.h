@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include <functional>
-#include <iostream>
 
 #if defined(__i386__) || defined(_M_IX96)
     #define ARCH_X86
@@ -18,16 +17,16 @@
 #endif 
 
 
-template<typename T, typename... U>
-uint_ptr GetFuncAddress(std::function<T(U...)> f)
+template<typename R, typename... Args>
+uint_ptr GetFuncAddress(std::function<R(Args...)> f)
 {
-    typedef T(fn_type)(U...);
+    typedef R(fn_type)(Args...);
     fn_type** fn_ptr = f.template target<fn_type*>();
-    return (uint_ptr)*fn_ptr;
+    return reinterpret_cast<uint_ptr>(*fn_ptr);
 }
 
-template<typename T, typename... U>
-bool FunctionsEquals(const std::function<T(U...)>& f1, const std::function<T(U...)>& f2)
+template<typename R, typename... Args>
+bool FunctionsEquals(const std::function<R(Args...)>& f1, const std::function<R(Args...)>& f2)
 {
     auto adr1 = GetFuncAddress(f1);
     auto adr2 = GetFuncAddress(f2);
