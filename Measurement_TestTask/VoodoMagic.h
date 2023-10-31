@@ -5,7 +5,7 @@
 
 #if defined(__i386__) || defined(_M_IX96)
     #define ARCH_X86
-#elif defined(__x86_86__) || defined(_M_X64)
+#elif defined(__x86_64__) || defined(_M_X64)
     #define ARCH_X64
 #else
     #error "Undefined CPU architecture
