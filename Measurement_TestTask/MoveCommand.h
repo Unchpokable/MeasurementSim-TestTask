@@ -9,6 +9,7 @@ public:
     MoveCommand(RuntimeContext* context)
     {
         m_context = context;
+        SetType(ci_move);
     }
     ~MoveCommand() override
     {

@@ -15,6 +15,7 @@ public:
     PointCommand(RuntimeContext* context)
     {
         m_context = context;
+        SetType(ci_point);
     }
 
     ~PointCommand() override = default;

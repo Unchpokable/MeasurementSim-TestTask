@@ -16,3 +16,9 @@ ContextObjectType ContextObject::GetType() const noexcept
     return m_type;
 }
 
+void ContextObject::SetType(ContextObjectType type)
+{
+    m_type = type;
+}
+
+

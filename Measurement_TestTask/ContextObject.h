@@ -60,6 +60,8 @@ public:
     ContextObjectType GetType() const noexcept;
 
 protected:
+    void SetType(ContextObjectType type);
+
     QString m_object_name;
     ContextObjectType m_type;
 };
