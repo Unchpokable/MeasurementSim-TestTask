@@ -13,7 +13,6 @@ void PointCommand::Execute(const std::vector<double>& args)
     m_actual_position = const_cast<MeasureMachine*>(machine)->GetPoint(m_normal, m_nominal_position);
 }
 
-
 QString PointCommand::ToString() {
     std::stringstream out {};
 
@@ -35,7 +34,7 @@ std::string PointCommand::NominalToString(Brackets brackets)
 {
     auto bracket = GetBracket(brackets);
     std::stringstream out {};
-    out << bracket.Open << m_nominal_position.x << ", " << m_nominal_position.y << ", " << m_nominal_position.z << bracket.Close;
+    out << bracket.Open << m_nominal_position.x() << ", " << m_nominal_position.y() << ", " << m_nominal_position.z() << bracket.Close;
     return out.str();
 }
 
@@ -43,7 +42,7 @@ std::string PointCommand::ActualToString(Brackets brackets)
 {
     auto bracket = GetBracket(brackets);
     std::stringstream out {};
-    out << bracket.Open << m_actual_position.x << ", " << m_actual_position.y << ", " << m_actual_position.z << bracket.Close;
+    out << bracket.Open << m_actual_position.x() << ", " << m_actual_position.y() << ", " << m_actual_position.z() << bracket.Close;
     return out.str();
 }
 
@@ -51,20 +50,6 @@ std::string PointCommand::NormalToString(Brackets brackets)
 {
     auto bracket = GetBracket(brackets);
     std::stringstream out {};
-    out << bracket.Open << m_normal.x << ", " << m_normal.y << ", " << m_normal.z << bracket.Close;
+    out << bracket.Open << m_normal.x() << ", " << m_normal.y() << ", " << m_normal.z() << bracket.Close;
     return out.str();
 }
-
-Bracket PointCommand::GetBracket(Brackets brackets)
-{
-    switch (brackets)
-    {
-    case BR_ROUND:
-        return RoundBrackets();
-    case BR_SQUARE:
-        return SquareBrackets();
-    }
-
-    return RoundBrackets();
-}
-

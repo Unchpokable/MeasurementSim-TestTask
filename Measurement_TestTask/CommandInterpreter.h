@@ -5,6 +5,7 @@
 #include <mutex>
 
 #include "Callbacks.h"
+#include "CommandBase.h"
 
 class CommandInterpreter
 {

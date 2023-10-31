@@ -1,5 +1,7 @@
 ﻿#include "CommandInterpreter.h"
 
+#include "CommandBase.h"
+
 CommandInterpreter::CommandInterpreter() noexcept
     : m_mutex()
 {

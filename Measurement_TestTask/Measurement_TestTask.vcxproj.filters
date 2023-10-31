@@ -111,5 +111,8 @@
     <ClInclude Include="Formats.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VoodoMagic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

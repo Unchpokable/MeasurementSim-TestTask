@@ -20,7 +20,7 @@ QString MoveCommand::ToString()
     std::stringstream out {};
     auto probe = m_context->GetMeasureMachine()->GetProbePosition();
 
-    out << "$MOVE(" << probe.x << "," << probe.y << "," << probe.z << ")\n";
+    out << "$MOVE(" << probe.x() << "," << probe.y() << "," << probe.z() << ")\n";
 
     return QString::fromUtf8(out.str().c_str());
 }

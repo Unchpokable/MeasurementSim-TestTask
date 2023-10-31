@@ -13,3 +13,6 @@ struct Bracket
 
 Bracket RoundBrackets();
 Bracket SquareBrackets();
+
+//Returns Bracket struct with Open-Close brackets by given type
+Bracket GetBracket(Brackets brackets);

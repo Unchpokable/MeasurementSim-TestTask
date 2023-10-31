@@ -29,8 +29,6 @@ private:
     std::string ActualToString(Brackets brackets);
     std::string NormalToString(Brackets brackets);
 
-    Bracket GetBracket(Brackets brackets);
-
     Point3d m_nominal_position;
     Point3d m_actual_position;
     Eigen::Vector3d m_normal;
