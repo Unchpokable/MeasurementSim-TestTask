@@ -35,7 +35,7 @@ bool RuntimeContext::RemoveObject(const QString& object_name, ContextOperationCa
 
     auto others = exclude_if(m_context_objects,
                                         [object_name](ContextObject* ctx) {
-        return ctx->Name() == object_name;
+        return ctx->GetName() == object_name;
     }, &ref_count);
 
     if(ref_count == 0)
@@ -43,7 +43,7 @@ bool RuntimeContext::RemoveObject(const QString& object_name, ContextOperationCa
         const auto where = std::find_if(m_context_objects->begin(),
             m_context_objects->end(),
             [object_name](ContextObject* ctx) {
-            return ctx->Name() == object_name;
+            return ctx->GetName() == object_name;
         });
 
         if(where != m_context_objects->end())
@@ -72,7 +72,7 @@ bool RuntimeContext::AddObject(ContextObject* object, ContextOperationCallback c
 
     if (std::find(m_context_objects->begin(), m_context_objects->end(), object) != m_context_objects->end())
     {
-        callback(this, QString("Unable to add object named " + object->Name() + ", because there is already object named that"));
+        callback(this, QString("Unable to add object named " + object->GetName() + ", because there is already object named that"));
         return false;
     }
 
@@ -84,7 +84,7 @@ const ContextObject* RuntimeContext::GetObjectByName(const QString& object_name)
 {
     auto obj = std::find_if(m_context_objects->begin(), m_context_objects->end(),
         [object_name](ContextObject* ctx) {
-        return ctx->Name() == object_name;
+        return ctx->GetName() == object_name;
     });
 
     if(obj != m_context_objects->end())
