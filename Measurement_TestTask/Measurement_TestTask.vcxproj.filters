@@ -70,6 +70,9 @@
     <ClCompile Include="Formats.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BindedCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommandInterpreter.h">

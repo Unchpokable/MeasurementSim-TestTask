@@ -98,6 +98,7 @@
     <QtRcc Include="UMeasure.qrc" />
     <QtUic Include="UMeasure.ui" />
     <QtMoc Include="UMeasure.h" />
+    <ClCompile Include="BindedCommand.cpp" />
     <ClCompile Include="CommandBase.cpp" />
     <ClCompile Include="ContextObject.cpp" />
     <ClCompile Include="CommandInterpreter.cpp" />
