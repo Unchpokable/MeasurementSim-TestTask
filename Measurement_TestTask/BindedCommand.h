@@ -6,11 +6,16 @@
 class BindedCommand
 {
 public:
-    BindedCommand(CommandBase* command, const std::vector<double>& args, const std::vector<ContextObject*> alternate_args)
+    BindedCommand(RuntimeContext* context, CommandBase* command, const std::vector<double>& args, const std::vector<ContextObject*> alternate_args)
     {
         m_command = command;
         m_args = args;
         m_alt_args = alternate_args;
+        m_context = context;
+
+        const auto cmd_ctx = dynamic_cast<ContextObject*>(command);
+        m_type = cmd_ctx->GetType();
+        m_result = ce_not_started;
     }
     ~BindedCommand() = default;
 

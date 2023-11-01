@@ -4,5 +4,6 @@ enum CommandExecutionResult {
     ce_success,
     ce_fail,
     ce_interrupted,
-    ce_fucked_up
+    ce_fucked_up,
+    ce_not_started
 };

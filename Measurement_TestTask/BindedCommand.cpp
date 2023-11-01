@@ -20,3 +20,9 @@ void BindedCommand::Execute()
         break;
     }
 }
+
+CommandExecutionResult BindedCommand::Result() const noexcept
+{
+    return m_result;
+}
+
