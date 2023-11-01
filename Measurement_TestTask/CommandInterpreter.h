@@ -29,7 +29,8 @@ public:
     const RuntimeContext* GetContext() const noexcept;
 
 private:
-    void RunProgramAsyncInternal(SingleArgumentCallback<QString>);
+
+    void AddToContext(CommandBase* who);
 
     RuntimeContext* m_exec_context;
     std::vector<BindedCommand*>* m_commands;
