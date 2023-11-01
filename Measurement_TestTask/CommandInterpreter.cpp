@@ -43,9 +43,10 @@ void CommandInterpreter::RunProgram() const
     }
 }
 
-const std::thread* CommandInterpreter::RunProgramAsync(SingleArgumentCallback<QString> callback) const
+const std::thread* CommandInterpreter::RunProgramAsync(SingleArgumentCallback<QString> error_callback) const
 {
-    return new std::thread([this, callback]() {
+    return new std::thread([this, error_callback]() {
+        m_mutex.lock();
         for (const auto command: *m_commands)
         {
             try
@@ -54,9 +55,10 @@ const std::thread* CommandInterpreter::RunProgramAsync(SingleArgumentCallback<QS
             }
             catch(const std::exception& ex)
             {
-                callback(QString::fromUtf8(ex.what()));
+                error_callback(QString::fromUtf8(ex.what()));
             }
         }
+        m_mutex.unlock();
     });
 }
 
