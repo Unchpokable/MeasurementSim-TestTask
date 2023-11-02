@@ -31,35 +31,23 @@ RuntimeContext::~RuntimeContext() {
 
 bool RuntimeContext::RemoveObject(const QString& object_name, ContextOperationCallback callback)
 {
-    auto ref_count = 0;
-
-    auto others = exclude_if(m_context_objects,
-                                        [object_name](ContextObject* ctx) {
+    
+    const auto where = std::find_if(m_context_objects->begin(),
+        m_context_objects->end(),
+        [object_name](ContextObject* ctx) {
         return ctx->GetName() == object_name;
-    }, &ref_count);
+    });
 
-    if(ref_count == 0)
+    if(where != m_context_objects->end())
+        m_context_objects->erase(where);
+
+    else
     {
-        const auto where = std::find_if(m_context_objects->begin(),
-            m_context_objects->end(),
-            [object_name](ContextObject* ctx) {
-            return ctx->GetName() == object_name;
-        });
-
-        if(where != m_context_objects->end())
-            m_context_objects->erase(where);
-
-        else
-        {
-            callback(this, QString("Unable to remove object named " + object_name + ", because there is no object called that"));
-            return false;
-        }
-
-        return true;
+        callback(this, QString("Unable to remove object named " + object_name + ", because there is no object called that"));
+        return false;
     }
-    if (callback != nullptr)
-        callback(this, QString("Unable to remove object " + object_name + ", because other objects depends on it"));
-    return false;
+
+    return true;
 }
 
 bool RuntimeContext::AddObject(ContextObject* object, ContextOperationCallback callback)
@@ -100,5 +88,10 @@ const std::vector<ContextObject*>* RuntimeContext::GetContextObjects() const noe
 const MeasureMachine* RuntimeContext::GetMeasureMachine() const noexcept
 {
     return m_measure_machine;
+}
+
+const std::vector<ContextObject*>& RuntimeContext::FindDependencies(const QString& object_name)
+{
+    
 }
 

@@ -59,6 +59,7 @@ public:
     const ContextObject* GetObjectByName(const QString& object_name) const noexcept;
     const std::vector<ContextObject*>* GetContextObjects() const noexcept;
     const MeasureMachine* GetMeasureMachine() const noexcept;
+    const std::vector<ContextObject*>& FindDependencies(const QString& object_name);
 
 
 private:
