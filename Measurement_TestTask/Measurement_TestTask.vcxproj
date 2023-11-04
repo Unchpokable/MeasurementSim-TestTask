@@ -96,16 +96,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="UMeasure.qrc" />
+    <QtUic Include="AddMoveCommand.ui" />
     <QtUic Include="UMeasure.ui" />
     <QtMoc Include="UMeasure.h" />
-    <ClCompile Include="BindedCommand.cpp" />
+    <ClCompile Include="AddCommandBase.cpp" />
+    <ClCompile Include="AddMoveCommand.cpp" />
+    <ClCompile Include="BoundCommand.cpp" />
     <ClCompile Include="CommandBase.cpp" />
     <ClCompile Include="ContextObject.cpp" />
     <ClCompile Include="CommandInterpreter.cpp" />
+    <ClCompile Include="DefaultCallbacks.cpp" />
     <ClCompile Include="Formats.cpp" />
     <ClCompile Include="MeasureMachine.cpp" />
     <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="PlaneCommand.cpp" />
     <ClCompile Include="PointCommand.cpp" />
     <ClCompile Include="RuntimeContext.cpp" />
     <ClCompile Include="Serializer.cpp" />
@@ -113,12 +118,17 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BindedCommand.h" />
+    <QtMoc Include="AddMoveCommand.h" />
+    <ClInclude Include="AddCommandBase.h" />
+    <ClInclude Include="BoundCommand.h" />
     <ClInclude Include="Callbacks.h" />
     <ClInclude Include="CommandExecutionResult.h" />
+    <ClInclude Include="DefaultCallbacks.h" />
     <ClInclude Include="Formats.h" />
+    <ClInclude Include="GeometryData.h" />
     <ClInclude Include="MeasureMachine.h" />
     <ClInclude Include="MoveCommand.h" />
+    <ClInclude Include="PlaneCommand.h" />
     <ClInclude Include="PointCommand.h" />
     <ClInclude Include="Serializer.h" />
     <ClInclude Include="CommandBase.h" />

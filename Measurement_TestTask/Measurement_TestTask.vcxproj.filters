@@ -70,7 +70,19 @@
     <ClCompile Include="Formats.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BindedCommand.cpp">
+    <ClCompile Include="BoundCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddMoveCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultCallbacks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddCommandBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -78,7 +90,7 @@
     <ClInclude Include="CommandInterpreter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BindedCommand.h">
+    <ClInclude Include="BoundCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CommandExecutionResult.h">
@@ -117,5 +129,27 @@
     <ClInclude Include="VoodoMagic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PlaneCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultCallbacks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddCommandBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="AddMoveCommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="AddMoveCommand.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
 </Project>
