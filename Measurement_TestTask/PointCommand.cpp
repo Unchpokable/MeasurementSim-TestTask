@@ -30,6 +30,17 @@ QString PointCommand::ToString() {
     return QString::fromUtf8(out.str().c_str());
 }
 
+Data3D PointCommand::GetDimensionalInfo() const noexcept
+{
+    Data3D out{};
+    out.ActualPosition = m_actual_position;
+    out.NominalPosition = m_nominal_position;
+    out.Normal = m_normal;
+
+    return out;
+}
+
+
 std::string PointCommand::NominalToString(Brackets brackets)
 {
     auto bracket = GetBracket(brackets);

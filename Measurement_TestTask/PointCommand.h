@@ -6,6 +6,7 @@
 #include "CommandBase.h"
 #include "RuntimeContext.h"
 #include "Formats.h"
+#include "GeometryData.h"
 
 using Point3d = Eigen::Vector3d;
 
@@ -23,6 +24,7 @@ public:
     void Init(const Point3d& initial_pos, const Eigen::Vector3d& normal);
     void Execute(const std::vector<double>& args) override;
     QString ToString() override;
+    Data3D GetDimensionalInfo() const noexcept;
 
 private:
 
