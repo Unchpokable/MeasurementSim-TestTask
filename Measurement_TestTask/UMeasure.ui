@@ -47,7 +47,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_8">
+       <widget class="QPushButton" name="addMoveButton">
         <property name="text">
          <string>Переместить</string>
         </property>

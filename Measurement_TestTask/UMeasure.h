@@ -17,7 +17,9 @@ public:
     UMeasure(QWidget *parent = nullptr);
     ~UMeasure();
 
+
 private:
     Ui::UMeasureClass *ui;
     CommandInterpreter* m_interpreter;
+    void ShowAddCommandForm(ContextObjectType cmd_type);
 };
