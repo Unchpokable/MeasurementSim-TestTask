@@ -1,6 +1,6 @@
-﻿#include "BindedCommand.h"
+﻿#include "BoundCommand.h"
 
-void BindedCommand::Execute()
+void BoundCommand::Execute()
 {
     switch(m_type)
     {
@@ -21,7 +21,13 @@ void BindedCommand::Execute()
     }
 }
 
-CommandExecutionResult BindedCommand::Result() const noexcept
+CommandBase* BoundCommand::GetCommandObject() const noexcept
+{
+    return m_command;
+}
+
+
+CommandExecutionResult BoundCommand::Result() const noexcept
 {
     return m_result;
 }

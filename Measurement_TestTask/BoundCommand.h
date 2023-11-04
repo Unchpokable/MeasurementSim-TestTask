@@ -3,10 +3,10 @@
 #include "CommandExecutionResult.h"
 #include "RuntimeContext.h"
 
-class BindedCommand
+class BoundCommand
 {
 public:
-    BindedCommand(RuntimeContext* context, CommandBase* command, const std::vector<double>& args, const std::vector<ContextObject*> alternate_args)
+    BoundCommand(RuntimeContext* context, CommandBase* command, const std::vector<double>& args, const std::vector<ContextObject*>& alternate_args)
     {
         m_command = command;
         m_args = args;
@@ -17,10 +17,10 @@ public:
         m_type = cmd_ctx->GetType();
         m_result = ce_not_started;
     }
-    ~BindedCommand() = default;
+    ~BoundCommand() = default;
 
     void Execute();
-
+    CommandBase* GetCommandObject() const noexcept;
     CommandExecutionResult Result() const noexcept;
 
 private:
