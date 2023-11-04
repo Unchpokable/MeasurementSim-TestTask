@@ -29,7 +29,7 @@ RuntimeContext::~RuntimeContext() {
     delete m_context_objects;
 }
 
-bool RuntimeContext::RemoveObject(const QString& object_name, ContextOperationCallback callback)
+bool RuntimeContext::RemoveObject(const QString& object_name, const ContextOperationCallback& callback)
 {
     
     const auto where = std::find_if(m_context_objects->begin(),
@@ -43,24 +43,27 @@ bool RuntimeContext::RemoveObject(const QString& object_name, ContextOperationCa
 
     else
     {
-        callback(this, QString("Unable to remove object named " + object_name + ", because there is no object called that"));
+        if (callback != nullptr)
+            callback(this, QString("Unable to remove object named " + object_name + ", because there is no object called that"));
         return false;
     }
 
     return true;
 }
 
-bool RuntimeContext::AddObject(ContextObject* object, ContextOperationCallback callback)
+bool RuntimeContext::AddObject(ContextObject* object, const ContextOperationCallback& callback)
 {
     if (object == nullptr)
     {
-        callback(this, QString("Unable to add nullptr value to context"));
+        if (callback != nullptr)
+            callback(this, QString("Unable to add nullptr value to context"));
         return false;
     }
 
     if (std::find(m_context_objects->begin(), m_context_objects->end(), object) != m_context_objects->end())
     {
-        callback(this, QString("Unable to add object named " + object->GetName() + ", because there is already object named that"));
+        if (callback != nullptr)
+            callback(this, QString("Unable to add object named " + object->GetName() + ", because there is already object named that"));
         return false;
     }
 
@@ -80,6 +83,20 @@ const ContextObject* RuntimeContext::GetObjectByName(const QString& object_name)
     return nullptr;
 }
 
+std::shared_ptr<std::vector<ContextObject*>> RuntimeContext::GetObjectsOfType(ContextObjectType type) const noexcept
+{
+    auto out = std::make_shared<std::vector<ContextObject*>>();
+
+    for (const auto obj: *m_context_objects)
+    {
+        if(obj->GetType() == type)
+            out->push_back(obj);
+    }
+
+    return out;
+}
+
+
 const std::vector<ContextObject*>* RuntimeContext::GetContextObjects() const noexcept
 {
     return m_context_objects;
@@ -90,8 +107,35 @@ const MeasureMachine* RuntimeContext::GetMeasureMachine() const noexcept
     return m_measure_machine;
 }
 
-const std::vector<ContextObject*>& RuntimeContext::FindDependencies(const QString& object_name)
+std::shared_ptr<std::vector<ContextObject*>> RuntimeContext::GetObjectDependencies(const QString& object_name) const noexcept
 {
-    
+    auto out = std::make_shared<std::vector<ContextObject*>>(); // slow but quite safety
+
+    const auto obj = GetObjectByName(object_name);
+
+    for (auto dep: obj->GetDependencies())
+    {
+        out->push_back(dep);
+    }
+
+    return out;
+}
+
+// Returns bool flag that allow or does not allow to make some ContextObjects dependent to some root object.
+// Dependent objects should be placed in context vector left from root
+bool RuntimeContext::BindDependencies(ContextObject* root, const std::vector<ContextObject*>& deps) const noexcept
+{
+    auto root_iter_pos = std::find(m_context_objects->begin(), m_context_objects->end(), root);
+
+    if(root_iter_pos == m_context_objects->end())
+        return false;
+
+    for(auto dep_it { deps.begin() }; dep_it != deps.end(); dep_it++)
+    {
+        if(std::find(m_context_objects->begin(), m_context_objects->end(), *dep_it) >= root_iter_pos)
+            return false;
+        root->AddDependentObject(*dep_it);
+    }
+    return true;
 }
 

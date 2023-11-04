@@ -6,7 +6,7 @@
 
 class RuntimeContext;
 
-using ContextOperationCallback = void(RuntimeContext*, QString);
+using ContextOperationCallback = std::function<void(RuntimeContext*, QString)>;
 
 class RuntimeContext
 {
@@ -54,13 +54,14 @@ public:
     }
 
 
-    bool RemoveObject(const QString& object_name, ContextOperationCallback callback = nullptr);
-    bool AddObject(ContextObject* object, ContextOperationCallback callback = nullptr);
+    bool RemoveObject(const QString& object_name, const ContextOperationCallback& callback = nullptr);
+    bool AddObject(ContextObject* object, const ContextOperationCallback& callback = nullptr);
     const ContextObject* GetObjectByName(const QString& object_name) const noexcept;
+    std::shared_ptr<std::vector<ContextObject*>> GetObjectsOfType(ContextObjectType type) const noexcept;
     const std::vector<ContextObject*>* GetContextObjects() const noexcept;
     const MeasureMachine* GetMeasureMachine() const noexcept;
-    const std::vector<ContextObject*>& FindDependencies(const QString& object_name);
-
+    std::shared_ptr<std::vector<ContextObject*>> GetObjectDependencies(const QString& object_name) const noexcept;
+    bool BindDependencies(ContextObject* root, const std::vector<ContextObject*>& deps) const noexcept;
 
 private:
     RuntimeContext(const Eigen::Vector3d& machine_initial_position)
