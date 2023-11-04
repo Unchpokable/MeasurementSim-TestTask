@@ -3,6 +3,7 @@
 #include <QStyleFactory>
 #include "UMeasure.h"
 
+// Краткое описание всего нижепроисходящего - "Кодохульство"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
