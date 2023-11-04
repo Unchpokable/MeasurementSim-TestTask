@@ -17,6 +17,8 @@ enum ContextObjectType {
 
 class ContextObject
 {
+    friend class RuntimeContext;
+
 public:
     ContextObject() : m_object_name(""), m_type(ci_undefined)
     {
@@ -29,7 +31,8 @@ public:
     ContextObject(const ContextObject& other) = default;
 
     ContextObject(ContextObject&& other) noexcept : m_object_name(std::move(other.m_object_name)),
-                                                    m_type(other.m_type)
+                                                    m_type(other.m_type),
+                                                    m_dependencies(std::move(other.m_dependencies))
     {
     }
 
@@ -58,10 +61,14 @@ public:
     virtual bool IsEquals(const ContextObject& other) const noexcept;
     QString GetName() const noexcept;
     ContextObjectType GetType() const noexcept;
+    const std::vector<ContextObject*>& GetDependencies() const noexcept;
 
 protected:
+    void AddDependentObject(const ContextObject* dep_obj);
     void SetType(ContextObjectType type);
 
     QString m_object_name;
     ContextObjectType m_type;
+
+    std::vector<ContextObject*> m_dependencies;
 };

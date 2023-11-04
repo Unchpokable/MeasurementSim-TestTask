@@ -21,4 +21,14 @@ void ContextObject::SetType(ContextObjectType type)
     m_type = type;
 }
 
+void ContextObject::AddDependentObject(const ContextObject* dep_obj)
+{
+    m_dependencies.push_back(const_cast<ContextObject*>(dep_obj));
+}
+
+const std::vector<ContextObject*>& ContextObject::GetDependencies() const noexcept
+{
+    return m_dependencies;
+}
+
 
