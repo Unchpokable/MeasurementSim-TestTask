@@ -2,6 +2,7 @@
 
 #include <QtWidgets/QMainWindow>
 
+#include "AddCommandBase.h"
 #include "CommandInterpreter.h"
 #include "ui_UMeasure.h"
 
@@ -17,9 +18,26 @@ public:
     UMeasure(QWidget *parent = nullptr);
     ~UMeasure();
 
-
 private:
     Ui::UMeasureClass *ui;
     CommandInterpreter* m_interpreter;
     void ShowAddCommandForm(ContextObjectType cmd_type);
+
+    template<typename TCommand,
+        typename = std::enable_if_t<std::is_base_of_v<AddCommandBase, TCommand> &&
+                                    std::is_base_of_v<QDialog, TCommand>>>
+    void ShowFormAndAddCreatedCommand()
+    {
+        const auto form = new TCommand(this, const_cast<RuntimeContext*>(m_interpreter->GetContext()));
+        int ret = form->exec();
+
+        if (form)
+        {
+            const auto new_command = form->GetConstructedObject();
+
+            if(new_command == nullptr)
+                return;
+            m_interpreter->AddCommand(const_cast<BoundCommand*>(new_command));
+        }
+    }
 };
