@@ -15,11 +15,12 @@ struct Plane3d
 class PlaneCommand : public CommandBase , public ContextObject
 {
 public:
-    PlaneCommand()
+    PlaneCommand(const QString& obj_name)
     {
         m_nominal_plane_params = Plane3d();
         m_plane_params = m_nominal_plane_params;
         SetType(ci_plane);
+        m_object_name = obj_name;
     }
 
     void Init();
