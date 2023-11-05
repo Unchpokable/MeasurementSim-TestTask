@@ -97,10 +97,12 @@
   <ItemGroup>
     <QtRcc Include="UMeasure.qrc" />
     <QtUic Include="AddMoveCommand.ui" />
+    <QtUic Include="AddPointCommand.ui" />
     <QtUic Include="UMeasure.ui" />
     <QtMoc Include="UMeasure.h" />
     <ClCompile Include="AddCommandBase.cpp" />
     <ClCompile Include="AddMoveCommand.cpp" />
+    <ClCompile Include="AddPointCommand.cpp" />
     <ClCompile Include="BoundCommand.cpp" />
     <ClCompile Include="CommandBase.cpp" />
     <ClCompile Include="ContextObject.cpp" />
@@ -120,6 +122,7 @@
   <ItemGroup>
     <QtMoc Include="AddMoveCommand.h" />
     <ClInclude Include="AddCommandBase.h" />
+    <QtMoc Include="AddPointCommand.h" />
     <ClInclude Include="BoundCommand.h" />
     <ClInclude Include="Callbacks.h" />
     <ClInclude Include="CommandExecutionResult.h" />

@@ -85,6 +85,9 @@
     <ClCompile Include="AddCommandBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AddPointCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommandInterpreter.h">
@@ -146,9 +149,15 @@
     <QtMoc Include="AddMoveCommand.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="AddPointCommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="AddMoveCommand.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="AddPointCommand.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
