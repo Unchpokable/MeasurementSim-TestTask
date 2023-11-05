@@ -9,6 +9,14 @@ void PointCommand::Init(const Point3d& initial_pos, const Eigen::Vector3d& norma
 
 void PointCommand::Execute(const std::vector<double>& args)
 {
+    if(args.size() != 6)
+        throw std::invalid_argument("Not enough parameters for point command");
+
+    const Point3d nominal_pos(args[0], args[1], args[2]);
+    const Eigen::Vector3d normal(args[3], args[4], args[5]);
+
+    Init(nominal_pos, normal);
+
     const auto machine = m_context->GetMeasureMachine();
     m_actual_position = const_cast<MeasureMachine*>(machine)->GetPoint(m_normal, m_nominal_position);
 }
