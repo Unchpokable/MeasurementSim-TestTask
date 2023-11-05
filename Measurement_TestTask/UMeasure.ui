@@ -40,7 +40,7 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QPushButton" name="pushButton_9">
+       <widget class="QPushButton" name="addCommentButton">
         <property name="text">
          <string>Комментарий</string>
         </property>
@@ -54,49 +54,49 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_7">
+       <widget class="QPushButton" name="addPointButton">
         <property name="text">
          <string>Точка</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_6">
+       <widget class="QPushButton" name="addPlaneButton">
         <property name="text">
          <string>Плоскость</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="addCircleButton">
         <property name="text">
          <string>Окружность</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_5">
+       <widget class="QPushButton" name="addCircleCenterButton">
         <property name="text">
          <string>Точка (центр)</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_4">
+       <widget class="QPushButton" name="addProjectPlane2PointButton">
         <property name="text">
          <string>Проектция Т-&gt;ПЛ</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="addDiffPointButton">
         <property name="text">
          <string>Отклонение (Точка)</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="addDiffCircleButton">
         <property name="text">
          <string>Отклонение (Окр-сть)</string>
         </property>
@@ -105,7 +105,7 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QTextEdit" name="programTextView">
     <property name="geometry">
      <rect>
       <x>870</x>
