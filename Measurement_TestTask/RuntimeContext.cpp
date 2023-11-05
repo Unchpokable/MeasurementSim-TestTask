@@ -60,10 +60,15 @@ bool RuntimeContext::AddObject(ContextObject* object, const ContextOperationCall
         return false;
     }
 
-    if (std::find(m_context_objects->begin(), m_context_objects->end(), object) != m_context_objects->end())
+    if (std::find(m_context_objects->begin(), m_context_objects->end(), object) != m_context_objects->end() ||
+        std::find_if(m_context_objects->begin(), m_context_objects->end(), 
+        [object](ContextObject* ctx)
+        {
+                return ctx->GetName() == object->GetName();
+        }) != m_context_objects->end())
     {
         if (callback != nullptr)
-            callback(this, QString("Unable to add object named " + object->GetName() + ", because there is already object named that"));
+            callback(this, QString("Unable to add object named " + object->GetName() + ", because this object already added to context or this object has the same name with other different object"));
         return false;
     }
 
