@@ -29,15 +29,19 @@ void AddPointCommand::ConstructCommandObject()
         return;
     }
 
-    std::vector<double> args(3);
+    std::vector<double> args(6);
     const std::vector<ContextObject*> dummy {};
 
     args.push_back(std::stod(ui->xInput->text().toStdString()));
     args.push_back(std::stod(ui->yInput->text().toStdString()));
     args.push_back(std::stod(ui->zInput->text().toStdString()));
 
-    const auto command = new PointCommand(m_runtime_context, id);
+    args.push_back(std::stod(ui->iNormalInput->text().toStdString()));
+    args.push_back(std::stod(ui->jNormalInput->text().toStdString()));
+    args.push_back(std::stod(ui->kNormalInput->text().toStdString()));
 
+    const auto command = new PointCommand(m_runtime_context, id);
+    
     const auto bound_command = new BoundCommand(m_runtime_context,
         command,
         args,
