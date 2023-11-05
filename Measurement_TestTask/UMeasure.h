@@ -23,12 +23,14 @@ private:
     CommandInterpreter* m_interpreter;
     void ShowAddCommandForm(ContextObjectType cmd_type);
 
-    template<typename TCommand,
-        typename = std::enable_if_t<std::is_base_of_v<AddCommandBase, TCommand> &&
-                                    std::is_base_of_v<QDialog, TCommand>>>
+    //Если кому то интересно наглядное определение слова "Кодохульство" - то вот.
+
+    template<typename TAddCommand,
+        typename = std::enable_if_t<std::is_base_of_v<AddCommandBase, TAddCommand> &&
+                                    std::is_base_of_v<QDialog, TAddCommand>>>
     void ShowFormAndAddCreatedCommand()
     {
-        const auto form = new TCommand(this, const_cast<RuntimeContext*>(m_interpreter->GetContext()));
+        const auto form = new TAddCommand(this, const_cast<RuntimeContext*>(m_interpreter->GetContext()));
         int ret = form->exec();
 
         if (form)
