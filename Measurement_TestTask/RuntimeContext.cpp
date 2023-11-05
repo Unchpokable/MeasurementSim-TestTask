@@ -135,12 +135,21 @@ bool RuntimeContext::BindDependencies(ContextObject* root, const std::vector<Con
     if(root_iter_pos == m_context_objects->end())
         return false;
 
-    for(auto dep_it { deps.begin() }; dep_it != deps.end(); dep_it++)
+    std::vector<ContextObject*> allowed_dependencies {};
+
+    for(auto dep_it : deps)
     {
-        if(std::find(m_context_objects->begin(), m_context_objects->end(), *dep_it) >= root_iter_pos)
+        if(std::find(m_context_objects->begin(), m_context_objects->end(), dep_it) >= root_iter_pos)
             return false;
-        root->AddDependentObject(*dep_it);
+        allowed_dependencies.push_back(dep_it);
     }
+
+    if (allowed_dependencies.size() == deps.size())
+    {
+        for(const auto dep : allowed_dependencies)
+            root->AddDependentObject(dep);
+    }
+
     return true;
 }
 
