@@ -21,10 +21,16 @@ AddPointCommand::~AddPointCommand()
 
 void AddPointCommand::ConstructCommandObject()
 {
+    const QString id(ui->objectIdInput->text());
+
+    if (id.size() == 0)
+    {
+        QMessageBox::warning(this, QString("Warning"), QString("Object identifier can not be empty"));
+        return;
+    }
+
     std::vector<double> args(3);
     const std::vector<ContextObject*> dummy {};
-
-    const QString id(ui->objectIdInput->text());
 
     args.push_back(std::stod(ui->xInput->text().toStdString()));
     args.push_back(std::stod(ui->yInput->text().toStdString()));
