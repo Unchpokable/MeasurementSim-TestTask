@@ -17,7 +17,7 @@ class CommandsIterWrapper
 public:
     const command_vec_iterator& GetBegin() const;
     const command_vec_iterator& GetEnd() const;
-    const command_vec_iterator& GetCurrent() const;
+    command_vec_iterator& GetCurrent() const;
 
     void Free();
     bool IsValid() const noexcept;

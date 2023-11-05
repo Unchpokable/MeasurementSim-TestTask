@@ -138,11 +138,11 @@ const command_vec_iterator& CommandsIterWrapper::GetEnd() const
     return m_commandsEnd;
 }
 
-const command_vec_iterator& CommandsIterWrapper::GetCurrent() const
+command_vec_iterator& CommandsIterWrapper::GetCurrent() const
 {
     if(!m_iter_wrapper_valid)
         throw std::exception("Source object was changed or iterator was freed");
-    return m_commandsCurrent;
+    return const_cast<command_vec_iterator&>(m_commandsCurrent);
 }
 
 void CommandsIterWrapper::Free()
