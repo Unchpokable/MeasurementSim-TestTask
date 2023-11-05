@@ -2,6 +2,7 @@
 #include <QScrollBar>
 
 #include "AddMoveCommand.h"
+#include "AddPlaneCommand.h"
 #include "AddPointCommand.h"
 
 
@@ -18,6 +19,10 @@ UMeasure::UMeasure(QWidget *parent)
 
     connect(ui->addPointButton, &QPushButton::clicked, this, [this]() {
         ShowAddCommandForm(ci_point);
+    });
+
+    connect(ui->addPlaneButton, &QPushButton::clicked, this, [this]() {
+        ShowAddCommandForm(ci_plane);
     });
 }
 
@@ -39,6 +44,10 @@ void UMeasure::ShowAddCommandForm(ContextObjectType cmd_type)
         {
             ShowFormAndAddCreatedCommand<AddPointCommand>();
             return;
+        }
+    case ci_plane:
+        {
+            ShowFormAndAddCreatedCommand<AddPlaneCommand>();
         }
     }
 }
