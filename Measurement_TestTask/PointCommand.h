@@ -14,11 +14,9 @@ using Point3d = Eigen::Vector3d;
 class PointCommand : public CommandBase, public ContextObject
 {
 public:
-    PointCommand(RuntimeContext* context, const QString& obj_name)
+    PointCommand(RuntimeContext* context, const QString& obj_name) : ContextObject(obj_name, ci_point)
     {
         m_context = context;
-        m_object_name = obj_name;
-        SetType(ci_point);
     }
 
     ~PointCommand() override = default;

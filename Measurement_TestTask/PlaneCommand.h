@@ -8,18 +8,17 @@
 class PlaneCommand : public CommandBase , public ContextObject
 {
 public:
-    PlaneCommand(const QString& obj_name)
+    PlaneCommand(const QString& obj_name) : ContextObject(obj_name, ci_plane)
     {
         m_nominal_plane_params = Plane3d();
         m_plane_params = m_nominal_plane_params;
-        SetType(ci_plane);
-        m_object_name = obj_name;
     }
-
-    void Init();
 
     void Execute(const std::vector<ContextObject*>& args) override;
     QString ToString() override;
+
+    Plane3d GetNominalPlane() { return m_nominal_plane_params; }
+    Plane3d GetActualPlane() { return m_plane_params; }
 
 private:
     void CalculateActual(const Point3d& pt1, const Point3d& pt2, const Point3d& pt3);

@@ -44,7 +44,7 @@ Data3D PointCommand::GetDimensionalInfo() const noexcept
     out.ActualPosition = m_actual_position;
     out.NominalPosition = m_nominal_position;
     out.Normal = m_normal;
-
+    out.ActualNormal = out.Normal;
     return out;
 }
 

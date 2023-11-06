@@ -6,7 +6,7 @@
 class MoveCommand : public CommandBase, public ContextObject
 {
 public:
-    MoveCommand(RuntimeContext* context)
+    MoveCommand(RuntimeContext* context, QString name) : ContextObject(name, ci_move)
     {
         m_context = context;
         SetType(ci_move);
