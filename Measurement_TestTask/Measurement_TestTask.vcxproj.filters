@@ -124,6 +124,9 @@
     <ClCompile Include="ReportPointCommand.cpp">
       <Filter>Source Files\InternalCommandImpl</Filter>
     </ClCompile>
+    <ClCompile Include="ReportCircleCommand.cpp">
+      <Filter>Source Files\InternalCommandImpl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommandInterpreter.h">
@@ -193,6 +196,9 @@
       <Filter>Header Files\InternalCommandsImpl</Filter>
     </ClInclude>
     <ClInclude Include="ReportPointCommand.h">
+      <Filter>Header Files\InternalCommandsImpl</Filter>
+    </ClInclude>
+    <ClInclude Include="ReportCircleCommand.h">
       <Filter>Header Files\InternalCommandsImpl</Filter>
     </ClInclude>
   </ItemGroup>

@@ -120,6 +120,7 @@
     <ClCompile Include="PlaneCommand.cpp" />
     <ClCompile Include="PointCommand.cpp" />
     <ClCompile Include="ProjectCommand.cpp" />
+    <ClCompile Include="ReportCircleCommand.cpp" />
     <ClCompile Include="ReportPointCommand.cpp" />
     <ClCompile Include="RuntimeContext.cpp" />
     <ClCompile Include="Serializer.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="PlaneCommand.h" />
     <ClInclude Include="PointCommand.h" />
     <ClInclude Include="ProjectCommand.h" />
+    <ClInclude Include="ReportCircleCommand.h" />
     <ClInclude Include="ReportPointCommand.h" />
     <ClInclude Include="Serializer.h" />
     <ClInclude Include="CommandBase.h" />
