@@ -28,6 +28,10 @@ public:
     {
     }
 
+    ContextObject(QString name, ContextObjectType type) : m_object_name(std::move(name)), m_type(type)
+    {
+    }
+
     ContextObject(const ContextObject& other) = default;
 
     ContextObject(ContextObject&& other) noexcept : m_object_name(std::move(other.m_object_name)),
