@@ -33,6 +33,12 @@
     <Filter Include="Source Files\AddCommand">
       <UniqueIdentifier>{53dbe5a8-e219-4ebe-8f19-3d0b522b9248}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Service">
+      <UniqueIdentifier>{c5dae370-cb4f-4c5d-a578-5c7d4c997dad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Service">
+      <UniqueIdentifier>{2c3aaa9d-ed1c-47dc-8f14-37ab8acc6a0e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="UMeasure.qrc">
@@ -106,6 +112,18 @@
     <ClCompile Include="MathFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CircleCommand.cpp">
+      <Filter>Source Files\InternalCommandImpl</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCenterCommand.cpp">
+      <Filter>Source Files\InternalCommandImpl</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectCommand.cpp">
+      <Filter>Source Files\InternalCommandImpl</Filter>
+    </ClCompile>
+    <ClCompile Include="ReportPointCommand.cpp">
+      <Filter>Source Files\InternalCommandImpl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommandInterpreter.h">
@@ -164,6 +182,18 @@
     </ClInclude>
     <ClInclude Include="MathFunctions.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCommand.h">
+      <Filter>Header Files\InternalCommandsImpl</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCenterCommand.h">
+      <Filter>Header Files\InternalCommandsImpl</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectCommand.h">
+      <Filter>Header Files\InternalCommandsImpl</Filter>
+    </ClInclude>
+    <ClInclude Include="ReportPointCommand.h">
+      <Filter>Header Files\InternalCommandsImpl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

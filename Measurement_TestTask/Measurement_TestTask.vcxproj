@@ -106,6 +106,8 @@
     <ClCompile Include="AddPlaneCommand.cpp" />
     <ClCompile Include="AddPointCommand.cpp" />
     <ClCompile Include="BoundCommand.cpp" />
+    <ClCompile Include="CircleCenterCommand.cpp" />
+    <ClCompile Include="CircleCommand.cpp" />
     <ClCompile Include="CommandBase.cpp" />
     <ClCompile Include="ContextObject.cpp" />
     <ClCompile Include="CommandInterpreter.cpp" />
@@ -117,6 +119,8 @@
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="PlaneCommand.cpp" />
     <ClCompile Include="PointCommand.cpp" />
+    <ClCompile Include="ProjectCommand.cpp" />
+    <ClCompile Include="ReportPointCommand.cpp" />
     <ClCompile Include="RuntimeContext.cpp" />
     <ClCompile Include="Serializer.cpp" />
     <ClCompile Include="UMeasure.cpp" />
@@ -129,6 +133,8 @@
     <QtMoc Include="AddPlaneCommand.h" />
     <ClInclude Include="BoundCommand.h" />
     <ClInclude Include="Callbacks.h" />
+    <ClInclude Include="CircleCenterCommand.h" />
+    <ClInclude Include="CircleCommand.h" />
     <ClInclude Include="CommandExecutionResult.h" />
     <ClInclude Include="DefaultCallbacks.h" />
     <ClInclude Include="Formats.h" />
@@ -138,6 +144,8 @@
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="PlaneCommand.h" />
     <ClInclude Include="PointCommand.h" />
+    <ClInclude Include="ProjectCommand.h" />
+    <ClInclude Include="ReportPointCommand.h" />
     <ClInclude Include="Serializer.h" />
     <ClInclude Include="CommandBase.h" />
     <ClInclude Include="ContextObject.h" />
