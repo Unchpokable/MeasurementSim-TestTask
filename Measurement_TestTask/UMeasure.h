@@ -16,11 +16,9 @@ class UMeasure : public QMainWindow
 
 public:
     UMeasure(QWidget *parent = nullptr);
-    ~UMeasure();
+    ~UMeasure() override;
 
 private:
-    Ui::UMeasureClass *ui;
-    CommandInterpreter* m_interpreter;
     void ShowAddCommandForm(ContextObjectType cmd_type);
 
     //Если кому то интересно наглядное определение слова "Кодохульство" - то вот.
@@ -42,4 +40,7 @@ private:
             m_interpreter->AddCommand(const_cast<BoundCommand*>(new_command));
         }
     }
+
+    Ui::UMeasureClass *ui;
+    CommandInterpreter* m_interpreter;
 };
