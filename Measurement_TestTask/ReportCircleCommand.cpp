@@ -2,9 +2,10 @@
 
 #include <iomanip>
 
-QString DoubleToString(double val)
+QString DoubleToString(double val, int precision = 3)
 {
-    return QString::fromUtf8((std::stringstream {} << std::fixed << std::setprecision(3) << val).str());
+    return QString::fromUtf8((std::stringstream {} << std::fixed 
+        << std::setprecision(precision) << val).str());
 }
 
 void ReportCircleCommand::Execute(const std::vector<ContextObject*>& args)
