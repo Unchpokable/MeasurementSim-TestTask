@@ -103,6 +103,9 @@
     <ClCompile Include="CommandBase.cpp">
       <Filter>Source Files\InternalCommandImpl</Filter>
     </ClCompile>
+    <ClCompile Include="MathFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommandInterpreter.h">
@@ -158,6 +161,9 @@
     </ClInclude>
     <ClInclude Include="CommandBase.h">
       <Filter>Header Files\InternalCommandsImpl</Filter>
+    </ClInclude>
+    <ClInclude Include="MathFunctions.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

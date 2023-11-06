@@ -111,6 +111,7 @@
     <ClCompile Include="CommandInterpreter.cpp" />
     <ClCompile Include="DefaultCallbacks.cpp" />
     <ClCompile Include="Formats.cpp" />
+    <ClCompile Include="MathFunctions.cpp" />
     <ClCompile Include="MeasureMachine.cpp" />
     <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="Parser.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="DefaultCallbacks.h" />
     <ClInclude Include="Formats.h" />
     <ClInclude Include="GeometryData.h" />
+    <ClInclude Include="MathFunctions.h" />
     <ClInclude Include="MeasureMachine.h" />
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="PlaneCommand.h" />
