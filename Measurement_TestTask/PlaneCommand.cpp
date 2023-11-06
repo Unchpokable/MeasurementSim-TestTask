@@ -33,17 +33,7 @@ void PlaneCommand::CalculateNominal(const Point3d& pt1, const Point3d& pt2, cons
 
 Plane3d PlaneCommand::CalculatePlane(const Point3d& pt1, const Point3d& pt2, const Point3d& pt3)
 {
-    auto v1 = pt2 - pt1;
-    auto v2 = pt3 - pt1;
-
-    auto normal = v1.cross(v2).normalized();
-
-    auto a = normal.x();
-    auto b = normal.y();
-    auto c = normal.z();
-    auto d = -a * pt1.x() - b * pt1.y() - c * pt1.z();
-
-    return Plane3d { a, b, c, d, normal };
+    return PlaneFromPoints(pt1, pt2, pt3);
 }
 
 QString PlaneCommand::ToString()

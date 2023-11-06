@@ -3,14 +3,7 @@
 #include "eigen/include/Eigen/Dense"
 #include "CommandBase.h"
 #include "GeometryData.h"
-
-using Point3d = Eigen::Vector3d;
-
-struct Plane3d
-{
-    double A, B, C, D;
-    Eigen::Vector3d Normal;
-};
+#include "MathFunctions.h"
 
 class PlaneCommand : public CommandBase , public ContextObject
 {
