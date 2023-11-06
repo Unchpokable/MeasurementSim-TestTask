@@ -50,7 +50,6 @@ void AddPointCommand::ConstructCommandObject()
     close();
 }
 
-
 void AddPointCommand::OnAcceptButtonClicked()
 {
     ConstructCommandObject();
