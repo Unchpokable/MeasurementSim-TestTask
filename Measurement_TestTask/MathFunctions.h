@@ -2,6 +2,7 @@
 
 #include "eigen/include/Eigen/Core"
 #include "eigen/include/Eigen/Dense"
+#include "eigen/include/Eigen/Geometry"
 
 using Point3d = Eigen::Vector3d;
 

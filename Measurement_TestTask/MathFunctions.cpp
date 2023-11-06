@@ -28,9 +28,7 @@ Circle3d CircleFromPoints(const Point3d& pt1, const Point3d& pt2, const Point3d&
     center.x() = pt_sum.x() / 3.0;
     center.y() = pt_sum.y() / 3.0;
     center.z() = pt_sum.z() / 3.0;
-
     const auto radius = Eigen::Vector3d(pt1.x() - center.x(), pt1.y() - center.y(), pt1.z() - center.z()).norm();
-
     return { normal, center, radius };
 }
 
