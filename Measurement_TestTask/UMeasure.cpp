@@ -29,6 +29,7 @@ UMeasure::UMeasure(QWidget *parent)
 UMeasure::~UMeasure()
 {
     delete ui;
+    delete m_interpreter;
 }
 
 void UMeasure::ShowAddCommandForm(ContextObjectType cmd_type)
