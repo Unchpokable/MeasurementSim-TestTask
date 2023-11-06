@@ -17,11 +17,16 @@ public:
         m_type = cmd_ctx->GetType();
         m_result = ce_not_started;
     }
-    ~BoundCommand() = default;
+    ~BoundCommand()
+    {
+        delete m_command;
+    }
 
     void Execute();
     CommandBase* GetCommandObject() const noexcept;
     CommandExecutionResult Result() const noexcept;
+
+    const std::vector<ContextObject*>& GetDependencies() const noexcept;
 
 private:
     CommandBase* m_command;

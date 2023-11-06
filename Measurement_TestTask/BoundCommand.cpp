@@ -26,6 +26,11 @@ CommandBase* BoundCommand::GetCommandObject() const noexcept
     return m_command;
 }
 
+const std::vector<ContextObject*>& BoundCommand::GetDependencies() const noexcept
+{
+    return m_alt_args;
+}
+
 
 CommandExecutionResult BoundCommand::Result() const noexcept
 {

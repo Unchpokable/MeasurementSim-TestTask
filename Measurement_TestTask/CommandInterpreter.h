@@ -40,14 +40,14 @@ public:
 
     ~CommandInterpreter()
     {
-        delete m_exec_context;
+        delete m_runtime_context;
         for(auto it : *m_commands)
             delete it;
         delete m_commands;
     }
 
-    void AddCommand(CommandBase*, const std::vector<double>& args);
-    void AddCommand(CommandBase*, const std::vector<ContextObject*>& args);
+    bool AddCommand(CommandBase*, const std::vector<double>& args);
+    bool AddCommand(CommandBase*, const std::vector<ContextObject*>& args);
     void AddCommand(BoundCommand*);
 
     std::shared_ptr<CommandsIterWrapper> GetCommandsIterator() const noexcept;
@@ -60,10 +60,11 @@ public:
 
 private:
 
-    void AddToContext(CommandBase* who);
+    bool AddToContext(CommandBase* who);
+    bool BindDependencies(ContextObject* root, const std::vector<ContextObject*>& deps);
     void InvalidateSharedIterators();
 
-    RuntimeContext* m_exec_context;
+    RuntimeContext* m_runtime_context;
     std::vector<BoundCommand*>* m_commands;
     std::mutex m_mutex;
     std::vector<std::shared_ptr<CommandsIterWrapper>>* m_shared_iterators;

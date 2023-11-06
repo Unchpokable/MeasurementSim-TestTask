@@ -30,7 +30,7 @@ void AddPlaneCommand::ConstructCommandObject() {
     }
 
     std::vector<ContextObject*> args {};
-    std::vector<double> dummy {};
+    const std::vector<double> dummy {};
 
     const auto point1 = m_runtime_context->GetObjectByName(ui->point1Input->text());
     if (point1 == nullptr)
@@ -47,7 +47,8 @@ void AddPlaneCommand::ConstructCommandObject() {
     }
 
     const auto point3 = m_runtime_context->GetObjectByName(ui->point3Input->text());
-    if(point3 == nullptr) {
+    if(point3 == nullptr) 
+    {
         QMessageBox::warning(this, QString("Warning"),
             QString("No object named " + ui->point3Input->text() + " found in context"));
     }
@@ -61,22 +62,6 @@ void AddPlaneCommand::ConstructCommandObject() {
                                                 command,
                                                 dummy,
                                                 args);
-
-    if (!m_runtime_context->AddObject(command, OnRuntimeContextCallback))
-    {
-        QMessageBox::warning(this, QString("Warning!"),
-            QString("Data you have entered is incorrect. Please, check your input and try again"));
-        return;
-    }
-
-    if (!m_runtime_context->BindDependencies(command, args))
-    {
-        QMessageBox::warning(this, QString("Warning!"),
-            QString("Interpreter can not resolve dependency objects for this plane - some of given points not initialized now and can not be bound with this plane"));
-
-        m_runtime_context->RemoveObject(command->GetName(), OnRuntimeContextCallback);
-        return;
-    }
 
     m_constructed_command = bound_command;
     close();

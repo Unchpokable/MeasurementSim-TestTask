@@ -46,18 +46,8 @@ void AddPointCommand::ConstructCommandObject()
         command,
         args,
         dummy);
-
-    if (m_runtime_context->AddObject(command, OnRuntimeContextCallback))
-    {
-        m_constructed_command = bound_command;
-        close();
-    }
-
-    else
-    {
-        QMessageBox::warning(this, QString::fromUtf8("Warning!"), 
-            QString::fromUtf8("Data you have entered is incorrect. Please, check your input and try again"));
-    }
+    m_constructed_command = bound_command;
+    close();
 }
 
 

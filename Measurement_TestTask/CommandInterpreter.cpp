@@ -7,45 +7,76 @@ CommandInterpreter::CommandInterpreter() noexcept
     : m_mutex()
 {
     m_commands = new std::vector<BoundCommand*>();
-    m_exec_context = new RuntimeContext();
+    m_runtime_context = new RuntimeContext();
     m_shared_iterators = new std::vector<std::shared_ptr<CommandsIterWrapper>>();
 }
 
-void CommandInterpreter::AddCommand(CommandBase* command, const std::vector<double>& args)
+bool CommandInterpreter::AddCommand(CommandBase* command, const std::vector<double>& args)
 {
-    AddToContext(command);
+    const auto is_added_ctx = AddToContext(command);
+    if(!is_added_ctx)
+        return false;
     std::vector<ContextObject*> dummy {};
-    auto binded_command = new BoundCommand(m_exec_context, command, args, dummy);
-    m_commands->push_back(binded_command);
-    InvalidateSharedIterators();
-}
-
-void CommandInterpreter::AddCommand(CommandBase* command, const std::vector<ContextObject*>& args)
-{
-    AddToContext(command);
-    std::vector<double> dummy {};
-    auto bound_command = new BoundCommand(m_exec_context, command, dummy, args);
+    const auto bound_command = new BoundCommand(m_runtime_context, command, args, dummy);
     m_commands->push_back(bound_command);
     InvalidateSharedIterators();
+
+    return is_added_ctx;
+}
+
+bool CommandInterpreter::AddCommand(CommandBase* command, const std::vector<ContextObject*>& args)
+{
+    const auto is_added_ctx = AddToContext(command);
+    if(!is_added_ctx)
+        return false;
+
+    if(!BindDependencies(dynamic_cast<ContextObject*>(command), args))
+        return false;
+
+    const std::vector<double> dummy {};
+    const auto bound_command = new BoundCommand(m_runtime_context, command, dummy, args);
+    m_commands->push_back(bound_command);
+    InvalidateSharedIterators();
+
+    return is_added_ctx;
 }
 
 void CommandInterpreter::AddCommand(BoundCommand* command)
 {
     AddToContext(command->GetCommandObject());
+    const auto ctx = dynamic_cast<ContextObject*>(command->GetCommandObject());
+
+    const auto deps = command->GetDependencies();
+    if (deps.empty())
+        if (!BindDependencies(ctx, deps))
+            return;
+
     m_commands->push_back(command);
     InvalidateSharedIterators();
 }
 
-
-void CommandInterpreter::AddToContext(CommandBase* who)
+bool CommandInterpreter::AddToContext(CommandBase* who)
 {
     const auto contextObj = dynamic_cast<ContextObject*>(who);
 
     if(contextObj == nullptr)
         throw std::invalid_argument("Invalid parameter: Given object is not ContextObject pointer");
 
-    m_exec_context->AddObject(contextObj, OnRuntimeContextCallback);
+    return m_runtime_context->AddObject(contextObj, OnRuntimeContextCallback);
 }
+
+bool CommandInterpreter::BindDependencies(ContextObject* root, const std::vector<ContextObject*>& deps)
+{
+    const bool deps_bound = m_runtime_context->BindDependencies(root, deps);
+    if(!deps_bound) 
+    {
+        m_runtime_context->RemoveObject(root->GetName(), OnRuntimeContextCallback);
+        return false;
+    }
+    return true;
+}
+
+
 
 std::shared_ptr<CommandsIterWrapper> CommandInterpreter::GetCommandsIterator() const noexcept
 {
@@ -112,7 +143,7 @@ const std::thread* CommandInterpreter::RunProgramAsync(SingleArgumentCallback<QS
 
 const RuntimeContext* CommandInterpreter::GetContext() const noexcept
 {
-    return m_exec_context;
+    return m_runtime_context;
 }
 
 void CommandInterpreter::InvalidateSharedIterators()

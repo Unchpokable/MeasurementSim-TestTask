@@ -18,7 +18,6 @@ AddMoveCommand::~AddMoveCommand()
 void AddMoveCommand::OnAcceptButtonClicked()
 {
     ConstructCommandObject();
-    close();
 }
 
 void AddMoveCommand::ConstructCommandObject()
@@ -35,7 +34,6 @@ void AddMoveCommand::ConstructCommandObject()
         command,
         args_vec,
         dummy);
-
-    if (m_runtime_context->AddObject(command, OnRuntimeContextCallback))
-        m_constructed_command = bound_command;
+    m_constructed_command = bound_command;
+    close();
 }

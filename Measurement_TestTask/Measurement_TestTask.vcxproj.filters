@@ -21,6 +21,18 @@
       <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
       <Extensions>ts</Extensions>
     </Filter>
+    <Filter Include="Header Files\InternalCommandsImpl">
+      <UniqueIdentifier>{d9ebaa9c-afa5-462f-ab5b-0be12bd05cc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InternalCommandImpl">
+      <UniqueIdentifier>{aee97ba7-6f63-40cb-a660-9c9dfa5b6c93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AddCommand">
+      <UniqueIdentifier>{f03828fa-4eeb-4afc-ae68-510feb193f20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AddCommand">
+      <UniqueIdentifier>{53dbe5a8-e219-4ebe-8f19-3d0b522b9248}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="UMeasure.qrc">
@@ -46,9 +58,6 @@
     <ClCompile Include="ContextObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CommandBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CommandInterpreter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -58,13 +67,7 @@
     <ClCompile Include="Serializer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MoveCommand.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MeasureMachine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PointCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Formats.cpp">
@@ -73,23 +76,32 @@
     <ClCompile Include="BoundCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlaneCommand.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AddMoveCommand.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DefaultCallbacks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AddCommandBase.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="PlaneCommand.cpp">
+      <Filter>Source Files\InternalCommandImpl</Filter>
     </ClCompile>
-    <ClCompile Include="AddPointCommand.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="PointCommand.cpp">
+      <Filter>Source Files\InternalCommandImpl</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveCommand.cpp">
+      <Filter>Source Files\InternalCommandImpl</Filter>
+    </ClCompile>
+    <ClCompile Include="AddCommandBase.cpp">
+      <Filter>Source Files\AddCommand</Filter>
+    </ClCompile>
+    <ClCompile Include="AddMoveCommand.cpp">
+      <Filter>Source Files\AddCommand</Filter>
     </ClCompile>
     <ClCompile Include="AddPlaneCommand.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\AddCommand</Filter>
+    </ClCompile>
+    <ClCompile Include="AddPointCommand.cpp">
+      <Filter>Source Files\AddCommand</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandBase.cpp">
+      <Filter>Source Files\InternalCommandImpl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -108,9 +120,6 @@
     <ClInclude Include="ContextObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CommandBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Callbacks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -120,13 +129,7 @@
     <ClInclude Include="Serializer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MoveCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MeasureMachine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PointCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Formats.h">
@@ -135,28 +138,37 @@
     <ClInclude Include="VoodoMagic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlaneCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GeometryData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DefaultCallbacks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MoveCommand.h">
+      <Filter>Header Files\InternalCommandsImpl</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneCommand.h">
+      <Filter>Header Files\InternalCommandsImpl</Filter>
+    </ClInclude>
+    <ClInclude Include="PointCommand.h">
+      <Filter>Header Files\InternalCommandsImpl</Filter>
+    </ClInclude>
     <ClInclude Include="AddCommandBase.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\AddCommand</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandBase.h">
+      <Filter>Header Files\InternalCommandsImpl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AddMoveCommand.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="AddPointCommand.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\AddCommand</Filter>
     </QtMoc>
     <QtMoc Include="AddPlaneCommand.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\AddCommand</Filter>
+    </QtMoc>
+    <QtMoc Include="AddPointCommand.h">
+      <Filter>Header Files\AddCommand</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
