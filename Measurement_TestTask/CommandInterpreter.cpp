@@ -43,7 +43,8 @@ bool CommandInterpreter::AddCommand(CommandBase* command, const std::vector<Cont
 
 void CommandInterpreter::AddCommand(BoundCommand* command)
 {
-    AddToContext(command->GetCommandObject());
+    if(!AddToContext(command->GetCommandObject()))
+        return;
     const auto ctx = dynamic_cast<ContextObject*>(command->GetCommandObject());
 
     const auto deps = command->GetDependencies();

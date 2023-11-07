@@ -9,7 +9,6 @@ public:
     {
         m_max_center_diff = max_center_diff;
         m_max_radius_diff = max_radius_diff;
-        
     }
 
     void Execute(const std::vector<ContextObject*>& args) override;

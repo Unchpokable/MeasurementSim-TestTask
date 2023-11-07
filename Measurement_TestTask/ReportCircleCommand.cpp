@@ -36,6 +36,22 @@ QString ReportCircleCommand::ToString()
     return out;
 }
 
+QString ReportCircleCommand::ToPrettyString()
+{
+    QString out {};
+
+    const auto isSatisfying = IsSatisfyingCondition() ? "\nCircle check\n" : "\nCircle failed\n";
+
+    out.append(isSatisfying);
+    out.append("Difference (radius): " + (std::stringstream {} << std::fixed << std::setprecision(3)
+        << m_measured_radius_diff).str() + "\n");
+    out.append("Difference (center): " + (std::stringstream {} << std::fixed << std::setprecision(3)
+        << m_measured_center_diff).str()) + "\n";
+
+    return out;
+}
+
+
 bool ReportCircleCommand::IsSatisfyingCondition() const noexcept
 {
     return (m_measured_center_diff < m_max_center_diff) && (m_measured_radius_diff < m_max_radius_diff);

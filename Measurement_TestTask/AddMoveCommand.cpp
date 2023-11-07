@@ -1,6 +1,7 @@
 #include "AddMoveCommand.h"
 #include <QMessageBox>
 #include "DefaultCallbacks.h"
+#include "Formats.h"
 
 AddMoveCommand::AddMoveCommand(QWidget *parent, RuntimeContext* runtime_context) noexcept
     : QDialog(parent), AddCommandBase(runtime_context)
@@ -23,14 +24,21 @@ void AddMoveCommand::OnAcceptButtonClicked()
 void AddMoveCommand::ConstructCommandObject()
 {
     std::vector<double> args_vec{};
-    args_vec.push_back(std::stod(ui->xInput->text().toStdString()));
-    args_vec.push_back(std::stod(ui->yInput->text().toStdString()));
-    args_vec.push_back(std::stod(ui->zInput->text().toStdString()));
+    try
+    {
+        args_vec.push_back(std::stod(ui->xInput->text().toStdString()));
+        args_vec.push_back(std::stod(ui->yInput->text().toStdString()));
+        args_vec.push_back(std::stod(ui->zInput->text().toStdString()));
+    }
+    catch (const std::exception&)
+    {
+        QMessageBox::warning(this, "Incorrect input", "Entered value is not a number");
+        return;
+    }
 
     const std::vector<ContextObject*> dummy {};
 
-    const auto command = new MoveCommand(m_runtime_context, QString(
-        (std::stringstream {} << "service_object<" << rand() % 65536).str().c_str()));
+    const auto command = new MoveCommand(m_runtime_context, RandomString(10));
     const auto bound_command = new BoundCommand(m_runtime_context,
         command,
         args_vec,

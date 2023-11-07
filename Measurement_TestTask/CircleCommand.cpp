@@ -65,7 +65,7 @@ QString CircleCommand::ToPrettyString()
     out.append(dynamic_cast<CommandBase*>(m_base_points[0])->ToPrettyString() + "\n");
     out.append(dynamic_cast<CommandBase*>(m_base_points[0])->ToPrettyString() + "\n");
 
-    out.append("Nominal: " + Circle3d2String(m_nominal_circle));
+    out.append("Nominal: " + Circle3d2String(m_nominal_circle)+ "\n" );
     out.append("Actual: " + Circle3d2String(m_actual_circle) + "\n\n");
 
     return out;

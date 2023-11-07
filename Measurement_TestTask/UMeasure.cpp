@@ -5,10 +5,15 @@
 
 #include "AddCircleCenterCommand.h"
 #include "AddCircleCommand.h"
+#include "AddCircleDifferenceCommand.h"
+#include "AddCommentCommand.h"
 #include "AddMoveCommand.h"
 #include "AddPlaneCommand.h"
 #include "AddPointCommand.h"
+#include "AddPointDifferenceCommand.h"
+#include "AddProjectCommand.h"
 #include "CommandListModel.h"
+#include "CommentCommand.h"
 
 
 UMeasure::UMeasure(QWidget *parent)
@@ -17,7 +22,11 @@ UMeasure::UMeasure(QWidget *parent)
 {
     ui->setupUi(this);
     m_interpreter = new CommandInterpreter();
-    
+
+    connect(ui->addCommentButton, &QPushButton::clicked, this, [this]() {
+        ShowAddCommandForm(ci_comment);
+    });
+
     connect(ui->addMoveButton, &QPushButton::clicked, this, [this]() {
         ShowAddCommandForm(ci_move);
     });
@@ -36,6 +45,18 @@ UMeasure::UMeasure(QWidget *parent)
 
     connect(ui->addCircleCenterButton, &QPushButton::clicked, this, [this]() {
         ShowAddCommandForm(ci_circle_to_point);
+    });
+
+    connect(ui->addProjectPlane2PointButton, &QPushButton::clicked, this, [this]() {
+        ShowAddCommandForm(ci_project);
+    });
+
+    connect(ui->addDiffPointButton, &QPushButton::clicked, this, [this]() {
+        ShowAddCommandForm(ci_point_diff);
+    });
+
+    connect(ui->addDiffCircleButton, &QPushButton::clicked, this, [this]() {
+        ShowAddCommandForm(ci_circle_diff);
     });
 
     connect(ui->startProgramButton, &QPushButton::clicked, this, [this]() {
@@ -57,6 +78,11 @@ void UMeasure::ShowAddCommandForm(ContextObjectType cmd_type)
 {
     switch (cmd_type)
     {
+    case ci_comment:
+        {
+            ShowFormAndAddCreatedCommand<AddCommentCommand>();
+            return;
+        }
     case ci_move:
         {
             ShowFormAndAddCreatedCommand<AddMoveCommand>();
@@ -82,6 +108,24 @@ void UMeasure::ShowAddCommandForm(ContextObjectType cmd_type)
             ShowFormAndAddCreatedCommand<AddCircleCenterCommand>();
             return;
         }
+    case ci_project:
+        {
+            ShowFormAndAddCreatedCommand<AddProjectCommand>();
+            return;
+        }
+    case ci_point_diff:
+        {
+            ShowFormAndAddCreatedCommand<AddPointDifferenceCommand>();
+            return;
+        }
+    case ci_circle_diff:
+        {
+            ShowFormAndAddCreatedCommand<AddCircleDifferenceCommand>();
+            return;
+        }
+
+    case ci_undefined:
+        return;
     }
 }
 

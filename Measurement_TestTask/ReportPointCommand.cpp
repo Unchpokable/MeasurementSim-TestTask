@@ -38,3 +38,16 @@ bool ReportPointCommand::IsSatisfyingCondition() const noexcept
 {
     return m_measured_diff < m_maximum_diff;
 }
+
+QString ReportPointCommand::ToPrettyString()
+{
+    QString out {};
+
+    const auto check_msg = IsSatisfyingCondition() ? "\nPoint check\n" : "\nPoint fail\n";
+
+    out.append(check_msg);
+    out.append("Difference: " + (std::stringstream {} << std::fixed << std::setprecision(3)
+        << m_measured_diff).str() + "\n");
+
+    return out;
+}

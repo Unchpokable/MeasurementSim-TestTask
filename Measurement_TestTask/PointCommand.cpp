@@ -39,7 +39,7 @@ QString PointCommand::ToPrettyString()
 {
     QString out;
 
-    out.append("Point\nNominal:" + Point2String(m_nominal_position));
+    out.append("Point\nNominal: " + Point2String(m_nominal_position));
     out.append("\nActual: " + Point2String(m_actual_position));
 
     return out;

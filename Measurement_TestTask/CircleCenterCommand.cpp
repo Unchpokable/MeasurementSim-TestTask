@@ -8,8 +8,6 @@ void CircleCenterCommand::Execute(const std::vector<ContextObject*>& args)
         throw std::invalid_argument("Can not get center point of multiple circles at one time");
 
     const auto circle = dynamic_cast<CircleCommand*>(args[0]);
-    if(circle == nullptr)
-        throw std::invalid_argument("Given object is not a circle");
 
     m_root = circle;
     const auto actual = circle->GetActualCircle();
@@ -31,7 +29,7 @@ void CircleCenterCommand::Execute(const std::vector<ContextObject*>& args)
 QString CircleCenterCommand::ToString()
 {
     QString out {};
-    out.append("$CIRCLE_CENTER(ID::" + GetName() + ", ");
+    out.append("$CIRCLE_CENTER(ID::" + m_display_name + ", ");
     out.append(m_root->GetName() + ")");
     return out;
 }

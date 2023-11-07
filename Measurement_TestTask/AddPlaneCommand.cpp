@@ -37,6 +37,7 @@ void AddPlaneCommand::ConstructCommandObject() {
     {
         QMessageBox::warning(this, QString("Warning"),
             QString("No object named" + ui->point1Input->text() + "found in context"));
+        return;
     }
 
     const auto point2 = m_runtime_context->GetObjectByName(ui->point2Input->text());
@@ -44,6 +45,7 @@ void AddPlaneCommand::ConstructCommandObject() {
     {
         QMessageBox::warning(this, QString("Warning"),
             QString("No object named " + ui->point2Input->text() + " found in context"));
+        return;
     }
 
     const auto point3 = m_runtime_context->GetObjectByName(ui->point3Input->text());
@@ -51,6 +53,7 @@ void AddPlaneCommand::ConstructCommandObject() {
     {
         QMessageBox::warning(this, QString("Warning"),
             QString("No object named " + ui->point3Input->text() + " found in context"));
+        return;
     }
 
     args.push_back(const_cast<ContextObject*>(point1));

@@ -33,3 +33,5 @@ std::string Plane3d2StdString(const Plane3d& plane);
 QString Plane3dToString(const Plane3d& plane);
 
 QString Circle3d2String(const Circle3d& circle);
+
+QString RandomString(std::size_t len);

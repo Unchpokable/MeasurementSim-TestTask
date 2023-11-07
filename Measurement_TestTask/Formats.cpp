@@ -60,7 +60,7 @@ std::string Circle3d2StdString(const Circle3d& circle)
     std::stringstream buff {};
 
     buff << "Base Point: " << Point2StdString(circle.CenterPoint) << "\n";
-    buff << "Plane Normal: :" << Point2StdString(circle.Normal) << "\n";
+    buff << "Plane Normal: " << Point2StdString(circle.Normal) << "\n";
     buff << "Radius: " << std::fixed << std::setprecision(3) << circle.Radius;
 
     return buff.str();
@@ -72,9 +72,9 @@ std::string Plane3d2StdString(const Plane3d& plane)
 
     buff << std::fixed << std::setprecision(3);
 
-    buff << "Plane normal: " << plane.Normal;
+    buff << "Plane normal: " << plane.Normal << "\n";
 
-    buff << "Plane " << plane.A << "x + " << plane.B << "y + " << plane.C << "z + " << plane.D;
+    buff << "Plane " << plane.A << "x + " << plane.B << "y + " << plane.C << "z + " << plane.D << "\n";
 
     return buff.str();
 }
@@ -89,3 +89,18 @@ QString Circle3d2String(const Circle3d& circle)
     return QString::fromUtf8(Circle3d2StdString(circle));
 }
 
+QString RandomString(std::size_t len)
+{
+    const std::string characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
+    std::string randomString;
+
+    for(auto i = 0; i < len; i++) {
+        const std::size_t randomIndex = std::rand() % characters.length();
+        randomString += characters[randomIndex];
+    }
+
+    return QString::fromUtf8(randomString);
+}

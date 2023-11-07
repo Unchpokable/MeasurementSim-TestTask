@@ -133,7 +133,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Текстовое представление</string>
+     <string>Вывод:</string>
     </property>
    </widget>
    <widget class="QPushButton" name="startProgramButton">

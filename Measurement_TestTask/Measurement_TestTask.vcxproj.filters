@@ -142,6 +142,18 @@
     <ClCompile Include="CommandListModel.cpp">
       <Filter>Source Files\Service</Filter>
     </ClCompile>
+    <ClCompile Include="CommentCommand.cpp">
+      <Filter>Source Files\InternalCommandImpl</Filter>
+    </ClCompile>
+    <ClCompile Include="AddCommentCommand.cpp">
+      <Filter>Source Files\AddCommand</Filter>
+    </ClCompile>
+    <ClCompile Include="AddPointDifferenceCommand.cpp">
+      <Filter>Source Files\AddCommand</Filter>
+    </ClCompile>
+    <ClCompile Include="AddCircleDifferenceCommand.cpp">
+      <Filter>Source Files\AddCommand</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommandInterpreter.h">
@@ -216,6 +228,9 @@
     <ClInclude Include="ReportCircleCommand.h">
       <Filter>Header Files\InternalCommandsImpl</Filter>
     </ClInclude>
+    <ClInclude Include="CommentCommand.h">
+      <Filter>Header Files\InternalCommandsImpl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AddMoveCommand.h">
@@ -237,9 +252,18 @@
       <Filter>Header Files\Service</Filter>
     </QtMoc>
     <QtMoc Include="AddProjectCommand.h">
-      <Filter>Source Files\AddCommand</Filter>
+      <Filter>Header Files\AddCommand</Filter>
     </QtMoc>
     <QtMoc Include="AddProjectCommand.h">
+      <Filter>Header Files\AddCommand</Filter>
+    </QtMoc>
+    <QtMoc Include="AddCommentCommand.h">
+      <Filter>Header Files\AddCommand</Filter>
+    </QtMoc>
+    <QtMoc Include="AddPointDifferenceCommand.h">
+      <Filter>Header Files\AddCommand</Filter>
+    </QtMoc>
+    <QtMoc Include="AddCircleDifferenceCommand.h">
       <Filter>Header Files\AddCommand</Filter>
     </QtMoc>
   </ItemGroup>
@@ -260,9 +284,18 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="AddProjectCommand.ui">
-      <Filter>Source Files\AddCommand</Filter>
+      <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="AddProjectCommand.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="AddCommentCommand.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="AddPointDifferenceCommand.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="AddCircleDifferenceCommand.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
