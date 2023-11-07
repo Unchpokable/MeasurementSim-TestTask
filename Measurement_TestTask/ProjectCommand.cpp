@@ -25,6 +25,8 @@ void ProjectCommand::Execute(const std::vector<ContextObject*>& args)
     m_projection = { projection_actual, projection_nominal,
         plane->GetActualPlane().Normal, plane->GetNominalPlane().Normal
     };
+
+    Emit(this);
 }
 
 QString ProjectCommand::ToString()
@@ -35,6 +37,20 @@ QString ProjectCommand::ToString()
     out.append(m_plane->GetName() + ")");
     return out; // $PROJECT(ID::PRJ1, PT1, PL1)
 }
+
+QString ProjectCommand::ToPrettyString()
+{
+    QString out {};
+
+    out.append("Projected point\n");
+    out.append("Base point: " + m_root->ToPrettyString());
+    out.append("Projection plane: " + m_plane->ToPrettyString());
+    out.append("Projected point Nominal: " + Point2String(m_projection.ProjectionNominal));
+    out.append("Projection point actual: " + Point2String(m_projection.ProjectionActual));
+
+    return out;
+}
+
 
 const ProjectionPoint3d& ProjectCommand::GetProjectedPoint()
 {

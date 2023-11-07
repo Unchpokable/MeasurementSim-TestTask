@@ -19,12 +19,16 @@ public:
     }
     ~BoundCommand()
     {
-        delete m_command;
     }
 
     void Execute();
     CommandBase* GetCommandObject() const noexcept;
     CommandExecutionResult Result() const noexcept;
+
+    QString ToString() const noexcept;
+    QString ToPrettyString() const noexcept {
+        return m_command->ToPrettyString();
+    }
 
     const std::vector<ContextObject*>& GetDependencies() const noexcept;
 

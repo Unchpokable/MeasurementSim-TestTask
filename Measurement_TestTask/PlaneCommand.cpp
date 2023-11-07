@@ -3,6 +3,9 @@
 
 void PlaneCommand::Execute(const std::vector<ContextObject*>& args)
 {
+    m_base_points.clear();
+    m_base_points_data.clear();
+
     for (const auto arg: args)
     {
         auto point = dynamic_cast<PointCommand*>(arg);
@@ -19,6 +22,7 @@ void PlaneCommand::Execute(const std::vector<ContextObject*>& args)
 
     CalculateActual(m_base_points_data[0].ActualPosition, m_base_points_data[1].ActualPosition, m_base_points_data[2].ActualPosition);
     CalculateNominal(m_base_points_data[0].NominalPosition, m_base_points_data[1].NominalPosition, m_base_points_data[2].NominalPosition);
+    Emit(this);
 }
 
 void PlaneCommand::CalculateActual(const Point3d& pt1, const Point3d& pt2, const Point3d& pt3)
@@ -45,8 +49,25 @@ QString PlaneCommand::ToString()
 
     out << "$PLANE(ID::" << GetName().toStdString() << ", " << m_base_points[0]->GetName().toStdString()
         << ", " << m_base_points[1]->GetName().toStdString()
-        << ", " << m_base_points[1]->GetName().toStdString() << ")";
+        << ", " << m_base_points[1]->GetName().toStdString() << ")\n";
 
     return QString::fromUtf8(out.str());
+}
+
+QString PlaneCommand::ToPrettyString()
+{
+    if(m_base_points.size() != 3)
+        return "Invalid object";
+
+    QString out {};
+    out.append("Plane object\n");
+    out.append("based on: " + dynamic_cast<CommandBase*>(m_base_points[0])->ToPrettyString() + "\n");
+    out.append(dynamic_cast<CommandBase*>(m_base_points[0])->ToPrettyString() + "\n");
+    out.append(dynamic_cast<CommandBase*>(m_base_points[0])->ToPrettyString() + "\n");
+
+    out.append("Nominal: " + Plane3dToString(m_nominal_plane_params));
+    out.append("Actual: " + Plane3dToString(m_plane_params) + "\n\n");
+
+    return out;
 }
 

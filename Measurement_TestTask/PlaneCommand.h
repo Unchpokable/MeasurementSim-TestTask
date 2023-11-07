@@ -16,6 +16,7 @@ public:
 
     void Execute(const std::vector<ContextObject*>& args) override;
     QString ToString() override;
+    QString ToPrettyString() override;
 
     Plane3d GetNominalPlane() { return m_nominal_plane_params; }
     Plane3d GetActualPlane() { return m_plane_params; }

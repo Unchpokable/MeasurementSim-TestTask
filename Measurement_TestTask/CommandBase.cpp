@@ -19,15 +19,21 @@ QString CommandBase::ToString()
     return { "$EMPTY_COMMAND" };
 }
 
-void CommandBase::AddExecuteCallback(const SingleArgumentCallback<QString>& callback)
+QString CommandBase::ToPrettyString()
+{
+    return "Command not assigned to any 3D object";
+}
+
+
+void CommandBase::AddExecuteCallback(const SingleArgumentCallback<CommandBase*>& callback)
 {
     m_callback_list->push_back(callback);
 }
 
-void CommandBase::RemoveExecuteCallback(const SingleArgumentCallback<QString>& callback)
+void CommandBase::RemoveExecuteCallback(const SingleArgumentCallback<CommandBase*>& callback)
 {
     auto pos = std::find_if(m_callback_list->begin(), m_callback_list->end(), 
-        [callback](const SingleArgumentCallback<QString>& it)
+        [callback](const SingleArgumentCallback<CommandBase*>& it)
         {
             return FunctionsEquals(callback, it);
         });
@@ -41,9 +47,12 @@ void CommandBase::ClearCallbackList()
     m_callback_list->clear();
 }
 
-void CommandBase::Emit(const QString& arg) const noexcept
+void CommandBase::Emit(const CommandBase* who) const noexcept
 {
-    for(auto func : *m_callback_list)
+    for(auto& func : *m_callback_list)
         if(func != nullptr)
+        {
+            const auto arg = const_cast<CommandBase*>(who);
             func(arg);
+        }
 }

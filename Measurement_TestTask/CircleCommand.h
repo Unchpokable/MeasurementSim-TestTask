@@ -8,10 +8,13 @@ class CircleCommand : public CommandBase, public ContextObject
 public:
     CircleCommand(const QString& obj_name) : ContextObject(obj_name, ci_circle)
     {
+        m_actual_circle = {};
+        m_nominal_circle = {};
     }
 
     void Execute(const std::vector<ContextObject*>& args) override;
     QString ToString() override;
+    QString ToPrettyString() override;
 
     const Circle3d& GetNominalCircle();
     const Circle3d& GetActualCircle();

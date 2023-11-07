@@ -55,7 +55,7 @@ public:
     void FreeIterator(const std::shared_ptr<CommandsIterWrapper>& iterator);
     void FreeIterator(CommandsIterWrapper* iterator);
     void RunProgram() const;
-    const std::thread* RunProgramAsync(SingleArgumentCallback<QString>) const;
+    const std::thread* RunProgramAsync(SingleArgumentCallback<QString>, SingleArgumentCallback<QString>) const;
     const RuntimeContext* GetContext() const noexcept;
 
 private:

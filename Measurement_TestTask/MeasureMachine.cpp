@@ -29,7 +29,7 @@ Point3d MeasureMachine::GetPoint(const Eigen::Vector3d& normal, const Point3d& n
 
     const auto distance_to_probe = m_touch_probe_position - nominal_value;
 
-    Move(distance_to_probe);
+    SetPosition(nominal_value);
 
     return nominal_value + (n * move); // Kinda little move in normal directoin
 }

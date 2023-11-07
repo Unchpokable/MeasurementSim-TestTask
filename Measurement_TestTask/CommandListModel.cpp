@@ -1,0 +1,35 @@
+#include "CommandListModel.h"
+
+CommandListModel::CommandListModel(QObject *parent)
+    : QAbstractListModel(parent)
+{}
+
+CommandListModel::~CommandListModel() = default;
+
+int CommandListModel::rowCount(const QModelIndex& parent) const
+{
+    Q_UNUSED(parent);
+    return m_commands.size();
+}
+
+QVariant CommandListModel::data(const QModelIndex& index, int role) const
+{
+    if(!index.isValid() || index.row() >= m_commands.size() || index.row() < 0)
+        return {};
+
+    if (role == Qt::DisplayRole)
+    {
+        return QVariant(m_commands.at(index.row())->ToString());
+    }
+
+    return {};
+}
+
+void CommandListModel::addObject(const BoundCommand* object)
+{
+    beginInsertRows(QModelIndex(), m_commands.size(), m_commands.size());
+    m_commands.push_back(const_cast<BoundCommand*>(object));
+    endInsertRows();
+}
+
+

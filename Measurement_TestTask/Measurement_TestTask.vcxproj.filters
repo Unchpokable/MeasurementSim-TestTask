@@ -127,6 +127,21 @@
     <ClCompile Include="ReportCircleCommand.cpp">
       <Filter>Source Files\InternalCommandImpl</Filter>
     </ClCompile>
+    <ClCompile Include="AddCircleCenterCommand.cpp">
+      <Filter>Source Files\AddCommand</Filter>
+    </ClCompile>
+    <ClCompile Include="AddCircleCommand.cpp">
+      <Filter>Source Files\AddCommand</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandListModel.cpp">
+      <Filter>Source Files\Service</Filter>
+    </ClCompile>
+    <ClCompile Include="AddProjectCommand.cpp">
+      <Filter>Source Files\AddCommand</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandListModel.cpp">
+      <Filter>Source Files\Service</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommandInterpreter.h">
@@ -212,6 +227,21 @@
     <QtMoc Include="AddPointCommand.h">
       <Filter>Header Files\AddCommand</Filter>
     </QtMoc>
+    <QtMoc Include="AddCircleCenterCommand.h">
+      <Filter>Header Files\AddCommand</Filter>
+    </QtMoc>
+    <QtMoc Include="AddCircleCommand.h">
+      <Filter>Header Files\AddCommand</Filter>
+    </QtMoc>
+    <QtMoc Include="CommandListModel.h">
+      <Filter>Header Files\Service</Filter>
+    </QtMoc>
+    <QtMoc Include="AddProjectCommand.h">
+      <Filter>Source Files\AddCommand</Filter>
+    </QtMoc>
+    <QtMoc Include="AddProjectCommand.h">
+      <Filter>Header Files\AddCommand</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="AddMoveCommand.ui">
@@ -221,6 +251,18 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="AddPlaneCommand.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="AddCircleCenterCommand.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="AddCircleCommand.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="AddProjectCommand.ui">
+      <Filter>Source Files\AddCommand</Filter>
+    </QtUic>
+    <QtUic Include="AddProjectCommand.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

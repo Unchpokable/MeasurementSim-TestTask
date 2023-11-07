@@ -16,6 +16,7 @@ public:
     }
 
     QString ToString() override;
+    QString ToPrettyString() override;
     void Execute(const std::vector<double>& args) override;
 
 private:

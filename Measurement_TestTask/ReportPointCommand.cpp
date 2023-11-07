@@ -19,6 +19,8 @@ void ReportPointCommand::Execute(const std::vector<ContextObject*>& args)
 
     const auto diff = point_data.ActualPosition - point_data.NominalPosition;
     m_measured_diff = diff.norm();
+
+    Emit(this);
 }
 
 QString ReportPointCommand::ToString()

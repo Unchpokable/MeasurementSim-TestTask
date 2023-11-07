@@ -4,6 +4,7 @@
 
 #include "AddCommandBase.h"
 #include "CommandInterpreter.h"
+#include "CommandListModel.h"
 #include "ui_UMeasure.h"
 
 QT_BEGIN_NAMESPACE
@@ -20,6 +21,7 @@ public:
 
 private:
     void ShowAddCommandForm(ContextObjectType cmd_type);
+    void ExecuteCommandSequence() const noexcept;
 
     //Если кому то интересно наглядное определение слова "Кодохульство" - то вот.
 
@@ -33,14 +35,17 @@ private:
 
         if (form)
         {
-            const auto new_command = form->GetConstructedObject();
+            const auto new_command = const_cast<BoundCommand*>(form->GetConstructedObject());
 
             if(new_command == nullptr)
                 return;
-            m_interpreter->AddCommand(const_cast<BoundCommand*>(new_command));
+            m_interpreter->AddCommand(new_command);
+            new_command->Execute();
+            m_commands_list->addObject(new_command);
         }
     }
 
     Ui::UMeasureClass *ui;
     CommandInterpreter* m_interpreter;
+    CommandListModel* m_commands_list;
 };

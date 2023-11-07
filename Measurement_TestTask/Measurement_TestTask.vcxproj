@@ -96,19 +96,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="UMeasure.qrc" />
+    <QtUic Include="AddCircleCenterCommand.ui" />
+    <QtUic Include="AddCircleCommand.ui" />
     <QtUic Include="AddMoveCommand.ui" />
     <QtUic Include="AddPlaneCommand.ui" />
     <QtUic Include="AddPointCommand.ui" />
+    <QtUic Include="AddProjectCommand.ui" />
     <QtUic Include="UMeasure.ui" />
     <QtMoc Include="UMeasure.h" />
+    <ClCompile Include="AddCircleCenterCommand.cpp" />
+    <ClCompile Include="AddCircleCommand.cpp" />
     <ClCompile Include="AddCommandBase.cpp" />
     <ClCompile Include="AddMoveCommand.cpp" />
     <ClCompile Include="AddPlaneCommand.cpp" />
     <ClCompile Include="AddPointCommand.cpp" />
+    <ClCompile Include="AddProjectCommand.cpp" />
     <ClCompile Include="BoundCommand.cpp" />
     <ClCompile Include="CircleCenterCommand.cpp" />
     <ClCompile Include="CircleCommand.cpp" />
     <ClCompile Include="CommandBase.cpp" />
+    <ClCompile Include="CommandListModel.cpp" />
     <ClCompile Include="ContextObject.cpp" />
     <ClCompile Include="CommandInterpreter.cpp" />
     <ClCompile Include="DefaultCallbacks.cpp" />
@@ -129,14 +136,18 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AddMoveCommand.h" />
+    <QtMoc Include="AddCircleCenterCommand.h" />
+    <QtMoc Include="AddCircleCommand.h" />
     <ClInclude Include="AddCommandBase.h" />
     <QtMoc Include="AddPointCommand.h" />
     <QtMoc Include="AddPlaneCommand.h" />
+    <QtMoc Include="AddProjectCommand.h" />
     <ClInclude Include="BoundCommand.h" />
     <ClInclude Include="Callbacks.h" />
     <ClInclude Include="CircleCenterCommand.h" />
     <ClInclude Include="CircleCommand.h" />
     <ClInclude Include="CommandExecutionResult.h" />
+    <QtMoc Include="CommandListModel.h" />
     <ClInclude Include="DefaultCallbacks.h" />
     <ClInclude Include="Formats.h" />
     <ClInclude Include="GeometryData.h" />

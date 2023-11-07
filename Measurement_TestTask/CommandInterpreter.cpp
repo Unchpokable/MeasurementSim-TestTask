@@ -124,18 +124,23 @@ void CommandInterpreter::RunProgram() const
     }
 }
 
-const std::thread* CommandInterpreter::RunProgramAsync(SingleArgumentCallback<QString> error_callback) const
+const std::thread* CommandInterpreter::RunProgramAsync(SingleArgumentCallback<QString> post_exec_callback,
+    SingleArgumentCallback<QString> error_callback) const
 {
-    return new std::thread([this, error_callback]() {
+    return new std::thread([this, error_callback, post_exec_callback]() {
         for (const auto command: *m_commands)
         {
             try
             {
                 command->Execute();
+                post_exec_callback(command->ToPrettyString());
+
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
             }
             catch(const std::exception& ex)
             {
                 error_callback(QString::fromUtf8(ex.what()));
+                return;
             }
         }
     });

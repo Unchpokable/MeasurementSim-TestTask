@@ -4,14 +4,17 @@
 class ReportCircleCommand : public CommandBase, public ContextObject
 {
 public:
-    ReportCircleCommand(const QString& obj_name, double max_center_diff, double max_radius_diff) : ContextObject(obj_name, ci_circle_diff)
+    ReportCircleCommand(const QString& obj_name, double max_center_diff, double max_radius_diff)
+        : ContextObject(obj_name + "_gen", ci_circle_diff)
     {
         m_max_center_diff = max_center_diff;
         m_max_radius_diff = max_radius_diff;
+        
     }
 
     void Execute(const std::vector<ContextObject*>& args) override;
     QString ToString() override;
+    QString ToPrettyString() override;
     bool IsSatisfyingCondition() const noexcept;
 
 private:

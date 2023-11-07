@@ -23,6 +23,8 @@ void ReportCircleCommand::Execute(const std::vector<ContextObject*>& args)
 
     m_measured_center_diff = (n_circle.CenterPoint - act_circle.CenterPoint).norm();
     m_measured_radius_diff = n_circle.Radius - act_circle.Radius;
+
+    Emit(this);
 }
 
 QString ReportCircleCommand::ToString()

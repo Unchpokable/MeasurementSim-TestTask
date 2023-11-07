@@ -14,6 +14,7 @@ public:
 
     void Execute(const std::vector<ContextObject*>& args) override;
     QString ToString() override;
+    QString ToPrettyString() override;
 
     bool IsSatisfyingCondition() const noexcept;
 

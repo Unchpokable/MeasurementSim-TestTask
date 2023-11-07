@@ -15,6 +15,7 @@ public:
 
     void Execute(const std::vector<ContextObject*>& args) override;
     QString ToString() override;
+    QString ToPrettyString() override;
 
     const ProjectionPoint3d& GetProjectedPoint();
 

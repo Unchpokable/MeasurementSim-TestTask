@@ -114,6 +114,9 @@
       <height>531</height>
      </rect>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
@@ -133,7 +136,7 @@
      <string>Текстовое представление</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_10">
+   <widget class="QPushButton" name="startProgramButton">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -180,6 +183,19 @@
       <width>851</width>
       <height>561</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>870</x>
+      <y>670</y>
+      <width>391</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Настройки</string>
     </property>
    </widget>
   </widget>

@@ -42,3 +42,8 @@ CommandExecutionResult BoundCommand::Result() const noexcept
     return m_result;
 }
 
+QString BoundCommand::ToString() const noexcept
+{
+    return m_command->ToString();
+}
+

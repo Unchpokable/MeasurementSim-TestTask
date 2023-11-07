@@ -3,6 +3,9 @@
 
 void CircleCommand::Execute(const std::vector<ContextObject*>& args)
 {
+    m_base_points.clear();
+    m_base_points_data.clear();
+
     for (const auto arg: args)
     {
         const auto point = dynamic_cast<PointCommand*>(arg);
@@ -20,6 +23,8 @@ void CircleCommand::Execute(const std::vector<ContextObject*>& args)
 
     CalculateNominal();
     CalculateActual();
+
+    Emit(this);
 }
 
 void CircleCommand::CalculateActual()
@@ -45,10 +50,27 @@ QString CircleCommand::ToString()
     out.append("$CIRCLE(ID::" + GetName().toStdString() + " ");
     out.append(m_base_points[0]->GetName().toStdString() + " ");
     out.append(m_base_points[1]->GetName().toStdString() + " ");
-    out.append(m_base_points[2]->GetName().toStdString() + ")");
+    out.append(m_base_points[2]->GetName().toStdString() + ")\n");
 
     return out;
 }
+
+QString CircleCommand::ToPrettyString()
+{
+    if(m_base_points.size() != 3)
+        return QString("Invalid object");
+
+    QString out {};
+    out.append("Circle based on: " + dynamic_cast<CommandBase*>(m_base_points[0])->ToPrettyString() + "\n");
+    out.append(dynamic_cast<CommandBase*>(m_base_points[0])->ToPrettyString() + "\n");
+    out.append(dynamic_cast<CommandBase*>(m_base_points[0])->ToPrettyString() + "\n");
+
+    out.append("Nominal: " + Circle3d2String(m_nominal_circle));
+    out.append("Actual: " + Circle3d2String(m_actual_circle) + "\n\n");
+
+    return out;
+}
+
 
 const Circle3d& CircleCommand::GetNominalCircle()
 {
