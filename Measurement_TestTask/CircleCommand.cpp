@@ -47,9 +47,9 @@ QString CircleCommand::ToString()
         return QString("Invalid object");
 
     QString out {};
-    out.append("$CIRCLE(ID::" + GetName().toStdString() + " ");
-    out.append(m_base_points[0]->GetName().toStdString() + " ");
-    out.append(m_base_points[1]->GetName().toStdString() + " ");
+    out.append("$CIRCLE(ID::" + GetName().toStdString() + ", ");
+    out.append(m_base_points[0]->GetName().toStdString() + ", ");
+    out.append(m_base_points[1]->GetName().toStdString() + ", ");
     out.append(m_base_points[2]->GetName().toStdString() + ")\n");
 
     return out;
