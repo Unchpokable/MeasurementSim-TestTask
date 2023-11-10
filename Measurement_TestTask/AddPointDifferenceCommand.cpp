@@ -35,7 +35,7 @@ void AddPointDifferenceCommand::ConstructCommandObject()
     {
         diff_threshold = std::stod(ui->thresholdInput->text().toStdString());
     }
-    catch(const std::exception& ex) 
+    catch(const std::exception&) 
     {
         QMessageBox::warning(this, "Incorrect input", "Entered number is not a valid number");
         return;
