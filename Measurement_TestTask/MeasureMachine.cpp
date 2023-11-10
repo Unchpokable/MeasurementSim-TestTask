@@ -1,5 +1,7 @@
 #include "MeasureMachine.h"
 
+#include <random>
+
 void MeasureMachine::Move(const Eigen::Vector3d& direction)
 {
     m_touch_probe_position += direction;
@@ -21,16 +23,16 @@ Point3d MeasureMachine::GetProbePosition() const noexcept
 }
 
 // Emulates point measurement. Actually, generate value that differs with nominal quite little
-Point3d MeasureMachine::GetPoint(const Eigen::Vector3d& normal, const Point3d& nominal_value)
+Point3d MeasureMachine::GetPoint(const Eigen::Vector3d& normal, const Point3d& nominal_value) const noexcept
 {
-    const auto n = normal.normalized();
-    const auto virtual_distance = rand() % 1000;
-    const auto move = m_minimal_step_size * virtual_distance;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<double> dis(-1, 1);
 
-    const auto distance_to_probe = m_touch_probe_position - nominal_value;
+    const double offset_x = dis(gen) * m_random_point_radius;
+    const double offset_y = dis(gen) * m_random_point_radius;
+    const double offset_z = dis(gen) * m_random_point_radius;
 
-    SetPosition(nominal_value);
-
-    return nominal_value + (n * move); // Kinda little move in normal directoin
+    return nominal_value + (Eigen::Vector3d(offset_x, offset_y, offset_z));
 }
 

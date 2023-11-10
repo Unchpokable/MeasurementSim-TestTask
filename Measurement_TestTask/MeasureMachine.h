@@ -36,12 +36,12 @@ public:
     void SetPosition(const Point3d& where);
     void Zero();
 
-    Point3d GetPoint(const Eigen::Vector3d& normal, const Point3d& nominal_value);
+    Point3d GetPoint(const Eigen::Vector3d& normal, const Point3d& nominal_value) const noexcept;
     Point3d GetProbePosition() const noexcept;
 
 
 private:
     Eigen::Vector3d m_touch_probe_position;
-    double m_minimal_step_size = 1e-6; // 0.000001
+    double m_random_point_radius = 1;
 };
 
