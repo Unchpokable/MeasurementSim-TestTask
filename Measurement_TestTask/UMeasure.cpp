@@ -63,6 +63,8 @@ UMeasure::UMeasure(QWidget *parent)
         ExecuteCommandSequence();
     });
 
+    connect(this, &UMeasure::OutputReceived, this, &UMeasure::OnOutputReceived);
+
     m_commands_list = new CommandListModel(this);
 
     ui->programView->setModel(m_commands_list);
@@ -129,16 +131,22 @@ void UMeasure::ShowAddCommandForm(ContextObjectType cmd_type)
     }
 }
 
-void UMeasure::ExecuteCommandSequence() const noexcept
+void UMeasure::ExecuteCommandSequence() noexcept
 {
+    ui->programTextView->clear();
     const auto exec_thread = m_interpreter->RunProgramAsync([this](const QString& callback_data) {
         ui->programTextView->append(callback_data + "\n");
     },
     [this](const QString& callback_data) {
-        ui->programTextView->append(callback_data + "\n");
+        emit OutputReceived(callback_data);
     });
 
     const_cast<std::thread*>(exec_thread)->join();
+}
+
+void UMeasure::OnOutputReceived(const QString& what) const noexcept
+{
+    ui->programTextView->append(what);
 }
 
 

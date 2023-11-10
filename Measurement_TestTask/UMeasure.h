@@ -21,7 +21,7 @@ public:
 
 private:
     void ShowAddCommandForm(ContextObjectType cmd_type);
-    void ExecuteCommandSequence() const noexcept;
+    void ExecuteCommandSequence() noexcept;
 
     //Если кому то интересно наглядное определение слова "Кодохульство" - то вот.
 
@@ -48,4 +48,10 @@ private:
     Ui::UMeasureClass *ui;
     CommandInterpreter* m_interpreter;
     CommandListModel* m_commands_list;
+
+signals:
+    void OutputReceived(const QString& what);
+
+private slots:
+    void OnOutputReceived(const QString& what) const noexcept;
 };
