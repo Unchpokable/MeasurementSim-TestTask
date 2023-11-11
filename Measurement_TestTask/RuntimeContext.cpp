@@ -88,7 +88,7 @@ const ContextObject* RuntimeContext::GetObjectByName(const QString& object_name)
     return nullptr;
 }
 
-ContextObject* RuntimeContext::GetObjectByIndex(std::size_t index)
+ContextObject* RuntimeContext::GetObjectByIndex(std::size_t index) const noexcept
 {
     if(index < 0 || m_context_objects->size() <= index)
         return nullptr;
