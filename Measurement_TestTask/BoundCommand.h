@@ -17,6 +17,22 @@ public:
         m_type = cmd_ctx->GetType();
         m_result = ce_not_started;
     }
+
+    BoundCommand& operator=(BoundCommand&& other) noexcept
+    {
+        if (this != &other)
+        {
+            m_command = other.m_command;
+            m_args = std::move(other.m_args);
+            m_alt_args = std::move(other.m_alt_args);
+            m_type = other.m_type;
+
+            m_result = other.m_result;
+            m_context = other.m_context;
+        }
+        return *this;
+    }
+
     ~BoundCommand()
     {
     }
