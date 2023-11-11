@@ -49,20 +49,24 @@ public:
     bool AddCommand(CommandBase*, const std::vector<double>& args);
     bool AddCommand(CommandBase*, const std::vector<ContextObject*>& args);
     void AddCommand(BoundCommand*);
-
+    bool ReplaceCommand(BoundCommand*, std::size_t);
+    bool RemoveCommand(std::size_t);
+    bool InsertCommand(std::size_t, BoundCommand*);
     std::shared_ptr<CommandsIterWrapper> GetCommandsIterator() const noexcept;
 
     void FreeIterator(const std::shared_ptr<CommandsIterWrapper>& iterator);
     void FreeIterator(CommandsIterWrapper* iterator);
     void RunProgram() const;
-    const std::thread* RunProgramAsync(SingleArgumentCallback<QString>, SingleArgumentCallback<QString>) const;
+    const std::thread* RunProgramAsync(const SingleArgumentCallback<QString>&, 
+                                       const SingleArgumentCallback<QString>&) const;
     const RuntimeContext* GetContext() const noexcept;
 
+    std::size_t GetCommandsCount() const noexcept;
 private:
 
     bool AddToContext(CommandBase* who);
     bool BindDependencies(ContextObject* root, const std::vector<ContextObject*>& deps);
-    void InvalidateSharedIterators();
+    void InvalidateSharedIterators() const noexcept;
 
     RuntimeContext* m_runtime_context;
     std::vector<BoundCommand*>* m_commands;
