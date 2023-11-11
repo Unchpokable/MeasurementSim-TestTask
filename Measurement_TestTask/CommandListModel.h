@@ -16,6 +16,9 @@ public:
     QVariant data(const QModelIndex& index, int role) const override;
 
     void addObject(const BoundCommand* object);
+    void removeObject(qsizetype index);
+    void replaceObject(qsizetype index, BoundCommand* object);
+    void insertObject(qsizetype index, BoundCommand* object);
 
 private:
     QVector<BoundCommand*> m_commands;

@@ -8,7 +8,7 @@ CommandListModel::~CommandListModel() = default;
 
 int CommandListModel::rowCount(const QModelIndex& parent) const
 {
-    Q_UNUSED(parent);
+    Q_UNUSED(parent)
     return m_commands.size();
 }
 
@@ -32,4 +32,29 @@ void CommandListModel::addObject(const BoundCommand* object)
     endInsertRows();
 }
 
+void CommandListModel::replaceObject(qsizetype index, BoundCommand* object)
+{
+    if(index < 0 || index >= m_commands.size())
+        return;
+    m_commands.replace(index, object);
+}
 
+
+void CommandListModel::removeObject(qsizetype index)
+{
+    if(index < 0 || index >= m_commands.size())
+        return;
+    beginRemoveRows(QModelIndex(), index, index);
+    m_commands.remove(index);
+    endRemoveRows();
+}
+
+void CommandListModel::insertObject(qsizetype index, BoundCommand* object)
+{
+    if(index < 0 || index >= m_commands.size())
+        return;
+
+    beginInsertRows(QModelIndex(), index, index);
+    m_commands.insert(index, object);
+    endInsertRows();
+}
