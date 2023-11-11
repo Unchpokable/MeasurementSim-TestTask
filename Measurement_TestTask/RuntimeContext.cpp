@@ -88,6 +88,15 @@ const ContextObject* RuntimeContext::GetObjectByName(const QString& object_name)
     return nullptr;
 }
 
+ContextObject* RuntimeContext::GetObjectByIndex(std::size_t index)
+{
+    if(index < 0 || m_context_objects->size() <= index)
+        return nullptr;
+
+    return (*m_context_objects)[index];
+}
+
+
 std::shared_ptr<std::vector<ContextObject*>> RuntimeContext::GetObjectsOfType(ContextObjectType type) const noexcept
 {
     auto out = std::make_shared<std::vector<ContextObject*>>();

@@ -57,6 +57,7 @@ public:
     bool RemoveObject(const QString& object_name, const ContextOperationCallback& callback = nullptr);
     bool AddObject(ContextObject* object, const ContextOperationCallback& callback = nullptr);
     const ContextObject* GetObjectByName(const QString& object_name) const noexcept;
+    ContextObject* GetObjectByIndex(std::size_t index);
     std::shared_ptr<std::vector<ContextObject*>> GetObjectsOfType(ContextObjectType type) const noexcept;
     const std::vector<ContextObject*>* GetContextObjects() const noexcept;
     const MeasureMachine* GetMeasureMachine() const noexcept;
