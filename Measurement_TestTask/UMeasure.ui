@@ -172,7 +172,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Выполнение PLANE1 :: Ожидание</string>
+     <string>Status...</string>
     </property>
    </widget>
    <widget class="QListView" name="programView">
