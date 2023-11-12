@@ -91,8 +91,11 @@ bool CommandInterpreter::ReplaceCommand(BoundCommand* new_command, std::size_t p
 
     for (const auto dep: deps)
     {
+        dep->RemoveTopLevelDependency(old_command);
         dep->AddTopLevelDependency(ctx);
     }
+
+    delete old_command;
 
     const auto where = m_commands->begin() + position;
     const auto ptr = m_commands->at(position);
@@ -110,6 +113,12 @@ bool CommandInterpreter::RemoveCommand(std::size_t where)
 
     const auto it = m_commands->begin();
     const auto ptr = m_commands->at(where);
+
+    const auto cmd_deps = ptr->GetDependencies();
+
+    for(const auto dep : cmd_deps)
+        dep->RemoveTopLevelDependency(dynamic_cast<ContextObject*>(ptr->GetCommandObject()));
+
     m_commands->erase(it + where);
     delete ptr;
     m_runtime_context->RemoveObject(where);
