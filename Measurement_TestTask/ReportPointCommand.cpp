@@ -28,7 +28,7 @@ QString ReportPointCommand::ToString()
     QString out {};
 
     out.append("$REPORT_PT(" + m_root->GetName() + ", ");
-    out.append((std::stringstream{} << std::fixed << std::setprecision(3) << m_measured_diff).str());
+    out.append((std::stringstream{} << std::fixed << std::setprecision(3) << m_maximum_diff).str());
     out.append(")");
 
     return out;
