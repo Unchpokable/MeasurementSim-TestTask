@@ -9,7 +9,7 @@ void BoundCommand::Execute()
     case ci_comment:
         {
             m_command->Execute(m_args);
-            return;
+            break;
         }
     case ci_circle:
     case ci_plane:
@@ -19,11 +19,13 @@ void BoundCommand::Execute()
     case ci_point_diff:
         {
             m_command->Execute(m_alt_args);
-            return;
+            break;
         }
     case ci_undefined:
         break;
     }
+
+    m_result = ce_success;
 }
 
 CommandBase* BoundCommand::GetCommandObject() const noexcept
