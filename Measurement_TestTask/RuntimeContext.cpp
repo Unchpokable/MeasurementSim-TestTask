@@ -40,7 +40,9 @@ bool RuntimeContext::RemoveObject(const QString& object_name) noexcept
 
     if(where != m_context_objects->end())
     {
+        const auto ptr = *where;
         m_context_objects->erase(where);
+        delete ptr;
         return true;
     }
 
@@ -57,8 +59,9 @@ bool RuntimeContext::RemoveObject(std::size_t position) noexcept
 
     if(pos >= m_context_objects->end()) 
         return false;
-
-    m_context_objects->erase(it + position);
+    const auto ptr = m_context_objects->at(position);
+    m_context_objects->erase(pos);
+    delete ptr;
     return true;
 }
 

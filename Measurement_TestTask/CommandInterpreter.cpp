@@ -135,6 +135,10 @@ bool CommandInterpreter::InsertCommand(std::size_t where, BoundCommand* object)
 
     const auto& deps = object->GetDependencies();
     const auto ctx = dynamic_cast<ContextObject*>(object->GetCommandObject());
+
+    if(!m_runtime_context->InsertObject(where, ctx))
+        return false;
+
     if(!deps.empty())
         if(!BindDependencies(ctx, deps))
             return false;
@@ -145,7 +149,6 @@ bool CommandInterpreter::InsertCommand(std::size_t where, BoundCommand* object)
     }
 
     m_commands->insert(it + where, object);
-    m_runtime_context->InsertObject(where, dynamic_cast<ContextObject*>(object->GetCommandObject()));
     InvalidateSharedIterators();
     return true;
 }

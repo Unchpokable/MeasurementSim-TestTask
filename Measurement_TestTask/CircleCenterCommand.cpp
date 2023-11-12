@@ -53,4 +53,3 @@ const PointCommand* CircleCenterCommand::GetGeneratedPoint() const noexcept
 {
     return m_result_point;
 }
-
