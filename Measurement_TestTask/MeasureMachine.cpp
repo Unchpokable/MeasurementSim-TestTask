@@ -27,7 +27,7 @@ Point3d MeasureMachine::GetPoint(const Eigen::Vector3d& normal, const Point3d& n
 {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<double> dis(-1, 1);
+    std::uniform_real_distribution dis(-0.1, 0.1);
 
     const double offset_x = dis(gen) * m_random_point_radius;
     const double offset_y = dis(gen) * m_random_point_radius;
