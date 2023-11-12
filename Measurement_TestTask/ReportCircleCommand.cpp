@@ -30,9 +30,9 @@ void ReportCircleCommand::Execute(const std::vector<ContextObject*>& args)
 QString ReportCircleCommand::ToString()
 {
     QString out {};
-    out.append("$REPORT_PLANE(" + m_root->GetName() + ", " 
+    out.append("$REPORT_CIRCLE(" + m_root->GetName() + ", " 
         + DoubleToString(m_max_center_diff) + ", " 
-        + DoubleToString(m_max_radius_diff));
+        + DoubleToString(m_max_radius_diff)) + ")";
     return out;
 }
 
