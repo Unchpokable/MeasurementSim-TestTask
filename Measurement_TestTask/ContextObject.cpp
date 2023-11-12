@@ -37,6 +37,20 @@ void ContextObject::AddTopLevelDependency(ContextObject* obj)
         m_top_level_dependencies.push_back(obj);
 }
 
+void ContextObject::RemoveTopLevelDependency(ContextObject* root)
+{
+    if(root == nullptr)
+        return;
+
+    const auto pos = std::find(m_top_level_dependencies.begin(), m_top_level_dependencies.end(), root);
+
+    if(pos != m_top_level_dependencies.end())
+    {
+        m_top_level_dependencies.erase(pos);
+    }
+}
+
+
 bool ContextObject::HasTopLevelDependency() const noexcept
 {
     return !m_top_level_dependencies.empty();

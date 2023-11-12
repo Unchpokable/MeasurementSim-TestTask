@@ -42,11 +42,18 @@ public:
     CommandExecutionResult Result() const noexcept;
 
     QString ToString() const noexcept;
-    QString ToPrettyString() const noexcept {
+    QString ToPrettyString() const noexcept
+    {
         return m_command->ToPrettyString();
     }
 
     const std::vector<ContextObject*>& GetDependencies() const noexcept;
+
+    void UpdateArgs(const std::vector<double>& args) noexcept;
+    void UpdateArgs(const std::vector<ContextObject*>& args) noexcept;
+
+    std::vector<double> GetArgs() const noexcept;
+    std::vector<ContextObject*> GetCtxArgs() const noexcept;
 
 private:
     CommandBase* m_command;

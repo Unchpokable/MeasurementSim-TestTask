@@ -103,7 +103,6 @@ bool CommandInterpreter::ReplaceCommand(BoundCommand* new_command, std::size_t p
     return true;
 }
 
-
 bool CommandInterpreter::RemoveCommand(std::size_t where)
 {
     if(where < 0 || where >= m_commands->size())

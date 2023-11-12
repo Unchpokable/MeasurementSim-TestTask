@@ -68,6 +68,7 @@ public:
     const std::vector<ContextObject*>& GetDependencies() const noexcept;
 
     void AddTopLevelDependency(ContextObject*);
+    void RemoveTopLevelDependency(ContextObject*);
     bool HasTopLevelDependency() const noexcept;
 
 protected:

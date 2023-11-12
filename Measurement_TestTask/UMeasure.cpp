@@ -86,6 +86,10 @@ void UMeasure::AddProgramViewContextMenu() noexcept
     connect(deleteAction, &QAction::triggered, this, &UMeasure::OnDeleteAction);
     contextMenu->addAction(deleteAction);
 
+    const auto editAction = new QAction("Edit", this);
+    connect(editAction, &QAction::triggered, this, &UMeasure::OnEditAction);
+    contextMenu->addAction(editAction);
+
     const auto replaceMenu = new QMenu("Replace", this);
     contextMenu->addMenu(replaceMenu);
 
@@ -285,6 +289,24 @@ void UMeasure::OnReplaceAction(ContextObjectType type)
 
     m_commands_list->replaceObject(row, command);
 }
+
+void UMeasure::OnEditAction()
+{
+    const auto selected_command = const_cast<BoundCommand*>(m_interpreter->At(ui->programView->currentIndex().row()));
+
+    const auto ctx = dynamic_cast<ContextObject*>(selected_command->GetCommandObject());
+    const auto cmd_type = ctx->GetType();
+    const auto cmd_name = ctx->GetName();
+
+    const auto command_new = GetCommandByType(cmd_type);
+
+    selected_command->UpdateArgs(command_new->GetArgs());
+    selected_command->UpdateArgs(command_new->GetCtxArgs());
+    selected_command->Execute();
+
+    ui->programView->update();
+}
+
 
 void UMeasure::AddInsertActionToMenu(QMenu* menu, const QString& title, ContextObjectType type, InsertionPosition pos)
 {

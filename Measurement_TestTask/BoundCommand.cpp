@@ -47,3 +47,24 @@ QString BoundCommand::ToString() const noexcept
     return m_command->ToString();
 }
 
+void BoundCommand::UpdateArgs(const std::vector<ContextObject*>& args) noexcept
+{
+    m_alt_args = args;
+}
+
+void BoundCommand::UpdateArgs(const std::vector<double>& args) noexcept
+{
+    m_args = args;
+}
+
+std::vector<double> BoundCommand::GetArgs() const noexcept
+{
+    return m_args;
+}
+
+std::vector<ContextObject*> BoundCommand::GetCtxArgs() const noexcept
+{
+    return m_alt_args;
+}
+
+

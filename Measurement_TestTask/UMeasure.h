@@ -75,6 +75,7 @@ private slots:
 
     void OnDeleteAction();
     void OnReplaceAction(ContextObjectType type);
+    void OnEditAction();
 
     inline void OnCustomContextMenuRequested(const QPoint& pos) const noexcept
     {
