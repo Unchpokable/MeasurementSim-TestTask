@@ -36,7 +36,7 @@ void CircleCommand::CalculateActual()
 
 void CircleCommand::CalculateNominal()
 {
-    m_actual_circle = CircleFromPoints(m_base_points_data[0].NominalPosition,
+    m_nominal_circle = CircleFromPoints(m_base_points_data[0].NominalPosition,
         m_base_points_data[1].NominalPosition,
         m_base_points_data[2].NominalPosition);
 }
@@ -62,8 +62,8 @@ QString CircleCommand::ToPrettyString()
 
     QString out {};
     out.append("Circle based on: " + dynamic_cast<CommandBase*>(m_base_points[0])->ToPrettyString() + "\n");
-    out.append(dynamic_cast<CommandBase*>(m_base_points[0])->ToPrettyString() + "\n");
-    out.append(dynamic_cast<CommandBase*>(m_base_points[0])->ToPrettyString() + "\n");
+    out.append(dynamic_cast<CommandBase*>(m_base_points[1])->ToPrettyString() + "\n");
+    out.append(dynamic_cast<CommandBase*>(m_base_points[2])->ToPrettyString() + "\n");
 
     out.append("Nominal: " + Circle3d2String(m_nominal_circle)+ "\n" );
     out.append("Actual: " + Circle3d2String(m_actual_circle) + "\n\n");
