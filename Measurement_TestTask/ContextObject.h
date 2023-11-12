@@ -67,12 +67,17 @@ public:
     ContextObjectType GetType() const noexcept;
     const std::vector<ContextObject*>& GetDependencies() const noexcept;
 
+    void AddTopLevelDependency(ContextObject*);
+    bool HasTopLevelDependency() const noexcept;
+
 protected:
     void AddDependentObject(const ContextObject* dep_obj);
     void SetType(ContextObjectType type);
 
     QString m_object_name;
     ContextObjectType m_type;
+
+    std::vector<ContextObject*> m_top_level_dependencies; // Top-Level dependency is an object that defined this object as it's dependency object
 
     std::vector<ContextObject*> m_dependencies;
 };

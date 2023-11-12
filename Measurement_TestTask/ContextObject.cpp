@@ -31,4 +31,13 @@ const std::vector<ContextObject*>& ContextObject::GetDependencies() const noexce
     return m_dependencies;
 }
 
+void ContextObject::AddTopLevelDependency(ContextObject* obj)
+{
+    if(obj != nullptr)
+        m_top_level_dependencies.push_back(obj);
+}
 
+bool ContextObject::HasTopLevelDependency() const noexcept
+{
+    return !m_top_level_dependencies.empty();
+}

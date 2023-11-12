@@ -247,6 +247,13 @@ void UMeasure::OnDeleteAction()
     const auto index = ui->programView->currentIndex();
     const auto row = index.row();
 
+    const auto selected_command = m_interpreter->At(row);
+    if (dynamic_cast<ContextObject*>(selected_command->GetCommandObject())->HasTopLevelDependency())
+    {
+        QMessageBox::warning(this, "Error!", "Selected object has top-level dependencies and can not be removed or replaced");
+        return;
+    }
+
     m_commands_list->removeObject(row);
     if (!m_interpreter->RemoveCommand(row))
     {
@@ -258,6 +265,13 @@ void UMeasure::OnReplaceAction(ContextObjectType type)
 {
     const auto index = ui->programView->currentIndex();
     const auto row = index.row();
+
+    const auto selected_command = m_interpreter->At(row);
+    if(dynamic_cast<ContextObject*>(selected_command->GetCommandObject())->HasTopLevelDependency()) 
+    {
+        QMessageBox::warning(this, "Error!", "Selected object has top-level dependencies and can not be removed or replaced");
+        return;
+    }
 
     const auto command = GetCommandByType(type);
     if(command == nullptr)

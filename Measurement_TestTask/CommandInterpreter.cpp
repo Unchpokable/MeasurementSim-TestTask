@@ -57,6 +57,11 @@ void CommandInterpreter::AddCommand(BoundCommand* command)
         }
     }
 
+    for (const auto dep: deps)
+    {
+        dep->AddTopLevelDependency(ctx);
+    }
+
     m_commands->push_back(command);
     InvalidateSharedIterators();
 }
@@ -82,6 +87,11 @@ bool CommandInterpreter::ReplaceCommand(BoundCommand* new_command, std::size_t p
             m_runtime_context->ReplaceObject(position, old_command);
             return false;
         }
+    }
+
+    for (const auto dep: deps)
+    {
+        dep->AddTopLevelDependency(ctx);
     }
 
     const auto where = m_commands->begin() + position;
@@ -121,12 +131,16 @@ bool CommandInterpreter::InsertCommand(std::size_t where, BoundCommand* object)
         if(!BindDependencies(ctx, deps))
             return false;
 
+    for (const auto dep: deps)
+    {
+        dep->AddTopLevelDependency(ctx);
+    }
+
     m_commands->insert(it + where, object);
     m_runtime_context->InsertObject(where, dynamic_cast<ContextObject*>(object->GetCommandObject()));
     InvalidateSharedIterators();
     return true;
 }
-
 
 bool CommandInterpreter::AddToContext(CommandBase* who)
 {
@@ -219,6 +233,13 @@ std::size_t CommandInterpreter::GetCommandsCount() const noexcept
     return m_commands->size();
 }
 
+const BoundCommand* CommandInterpreter::At(std::size_t position) const noexcept
+{
+    if(position < 0 || position >= m_commands->size())
+        return nullptr;
+
+    return m_commands->at(position);
+}
 
 void CommandInterpreter::InvalidateSharedIterators() const noexcept
 {

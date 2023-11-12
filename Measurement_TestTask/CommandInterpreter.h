@@ -62,6 +62,8 @@ public:
     const RuntimeContext* GetContext() const noexcept;
 
     std::size_t GetCommandsCount() const noexcept;
+
+    const BoundCommand* At(std::size_t) const noexcept;
 private:
 
     bool AddToContext(CommandBase* who);
