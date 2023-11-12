@@ -21,8 +21,8 @@ void ReportCircleCommand::Execute(const std::vector<ContextObject*>& args)
     const auto n_circle = m_root->GetNominalCircle();
     const auto act_circle = m_root->GetActualCircle();
 
-    m_measured_center_diff = (n_circle.CenterPoint - act_circle.CenterPoint).norm();
-    m_measured_radius_diff = n_circle.Radius - act_circle.Radius;
+    m_measured_center_diff = abs((n_circle.CenterPoint - act_circle.CenterPoint).norm());
+    m_measured_radius_diff = abs(n_circle.Radius - act_circle.Radius);
 
     Emit(this);
 }
@@ -44,9 +44,9 @@ QString ReportCircleCommand::ToPrettyString()
 
     out.append(isSatisfying);
     out.append("Difference (radius): " + (std::stringstream {} << std::fixed << std::setprecision(3)
-        << m_measured_radius_diff).str() + "\n");
+        << abs(m_measured_radius_diff)).str() + "\n");
     out.append("Difference (center): " + (std::stringstream {} << std::fixed << std::setprecision(3)
-        << m_measured_center_diff).str()) + "\n";
+        << abs(m_measured_center_diff)).str()) + "\n";
 
     return out;
 }

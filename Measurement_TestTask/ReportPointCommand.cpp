@@ -36,7 +36,7 @@ QString ReportPointCommand::ToString()
 
 bool ReportPointCommand::IsSatisfyingCondition() const noexcept
 {
-    return m_measured_diff < m_maximum_diff;
+    return abs(m_measured_diff) < abs(m_maximum_diff);
 }
 
 QString ReportPointCommand::ToPrettyString()
@@ -47,7 +47,7 @@ QString ReportPointCommand::ToPrettyString()
 
     out.append(check_msg);
     out.append("Difference: " + (std::stringstream {} << std::fixed << std::setprecision(3)
-        << m_measured_diff).str() + "\n");
+        << abs(m_measured_diff)).str() + "\n");
 
     return out;
 }
