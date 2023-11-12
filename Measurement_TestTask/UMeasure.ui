@@ -185,7 +185,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="reportExportButton">
     <property name="geometry">
      <rect>
       <x>870</x>
@@ -195,7 +195,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Настройки</string>
+     <string>Экспорт отчёта</string>
     </property>
    </widget>
   </widget>

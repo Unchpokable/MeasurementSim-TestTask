@@ -2,6 +2,7 @@
 
 #include <QMessageBox>
 #include <QScrollBar>
+#include <QFileDialog>
 
 #include "AddCircleCenterCommand.h"
 #include "AddCircleCommand.h"
@@ -61,6 +62,10 @@ UMeasure::UMeasure(QWidget *parent)
 
     connect(ui->startProgramButton, &QPushButton::clicked, this, [this]() {
         ExecuteCommandSequence();
+    });
+
+    connect(ui->reportExportButton, &QPushButton::clicked, this, [this]() {
+        ExportCommandExecutionReport();
     });
 
     connect(this, &UMeasure::OutputReceived, this, &UMeasure::OnOutputReceived);
@@ -385,3 +390,28 @@ void UMeasure::InsertNewCommandAfter(ContextObjectType type)
     m_commands_list->insertObject(row, command);
 }
 
+void UMeasure::ExportCommandExecutionReport()
+{
+    QString output_path = QFileDialog
+                ::getSaveFileName(this, 
+                        "Please, select file to save report", "", 
+                         "Text files (*.txt)");
+
+    if(output_path.isEmpty())
+        return;
+
+    QFile file(output_path);
+
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        QTextStream output(&file);
+
+        output << ui->programTextView->toPlainText();
+
+        file.close();
+
+        QMessageBox::information(this, "Success!", "Report successfully saved into " + output_path);
+        return;
+    }
+    QMessageBox::warning(this, "Ooops!!!", "Unable to open specified file: " + output_path);
+}

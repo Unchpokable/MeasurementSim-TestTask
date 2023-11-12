@@ -40,6 +40,8 @@ private:
 
     BoundCommand* GetCommandByType(ContextObjectType type);
 
+    void ExportCommandExecutionReport();
+
     //Если кому то интересно наглядное определение слова "Кодохульство" - то вот.
 
     template<typename TAddCommand,
