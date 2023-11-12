@@ -32,7 +32,6 @@ Circle3d CircleFromPoints(const Point3d& pt1, const Point3d& pt2, const Point3d&
     return { normal, center, radius };
 }
 
-
 Point3d Project(const Point3d& point, const Plane3d& plane)
 {
     //Algo stealed from MathNet sources. I have no idea is this works properly
@@ -41,5 +40,3 @@ Point3d Project(const Point3d& point, const Plane3d& plane)
 
     return point - (num + plane.D) * vec;
 }
-
-
