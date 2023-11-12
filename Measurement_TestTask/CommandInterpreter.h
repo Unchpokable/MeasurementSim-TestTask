@@ -19,6 +19,9 @@ public:
     const command_vec_iterator& GetEnd() const;
     command_vec_iterator& GetCurrent() const;
 
+    bool MoveNext();
+    void Reset();
+
     void Free();
     bool IsValid() const noexcept;
 

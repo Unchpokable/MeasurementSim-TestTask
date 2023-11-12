@@ -270,6 +270,21 @@ command_vec_iterator& CommandsIterWrapper::GetCurrent() const
     return const_cast<command_vec_iterator&>(m_commandsCurrent);
 }
 
+bool CommandsIterWrapper::MoveNext()
+{
+    if(m_commandsCurrent < m_commandsEnd)
+    {
+        ++m_commandsCurrent;
+        return true;
+    }
+    return false;
+}
+
+void CommandsIterWrapper::Reset()
+{
+    m_commandsCurrent = m_commandsEnd;
+}
+
 void CommandsIterWrapper::Free()
 {
     const_cast<CommandInterpreter*>(m_owner)->FreeIterator(this);
