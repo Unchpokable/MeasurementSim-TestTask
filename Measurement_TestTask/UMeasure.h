@@ -76,7 +76,7 @@ private slots:
     void OnDeleteAction();
     void OnReplaceAction(ContextObjectType type);
 
-    inline void OnCustomContextMenuRequested(const QPoint& pos)
+    inline void OnCustomContextMenuRequested(const QPoint& pos) const noexcept
     {
         contextMenu->exec(ui->programView->mapToGlobal(pos));
     }

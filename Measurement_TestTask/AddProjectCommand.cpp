@@ -4,6 +4,7 @@
 
 #include "DefaultCallbacks.h"
 #include "ProjectCommand.h"
+#include "TypeCheck.h"
 
 AddProjectCommand::AddProjectCommand(QWidget *parent, RuntimeContext* context)
     : QDialog(parent), AddCommandBase(context)
@@ -34,7 +35,7 @@ void AddProjectCommand::ConstructCommandObject()
 
 
     const auto target_point = m_runtime_context->GetObjectByName(ui->pointInput->text());
-    if(target_point == nullptr)
+    if(target_point == nullptr || !AssertType<PointCommand>(target_point))
     {
         QMessageBox::warning(this, QString("Incorrect input"), 
             QString("Given point does not exists"));
@@ -43,7 +44,7 @@ void AddProjectCommand::ConstructCommandObject()
 
     const auto target_plane = m_runtime_context->GetObjectByName(ui->planeInput->text());
 
-    if(target_plane == nullptr)
+    if(target_plane == nullptr || !AssertType<PlaneCommand>(target_plane))
     {
         QMessageBox::warning(this, QString("Incorrect input"), 
             QString("Given plane does not exists"));
@@ -52,7 +53,7 @@ void AddProjectCommand::ConstructCommandObject()
 
     const auto result_point = new PointCommand(m_runtime_context, obj_id);
 
-    if(!m_runtime_context->AddObject(result_point, OnRuntimeContextCallback)) {
+    if(!m_runtime_context->AddObject(result_point)) {
         QMessageBox::warning(this, QString("Invalid input"), QString("Can not add object to context"));
         return;
     }

@@ -3,6 +3,7 @@
 #include <QMessageBox>
 #include "Formats.h"
 #include "ReportPointCommand.h"
+#include "TypeCheck.h"
 
 AddPointDifferenceCommand::AddPointDifferenceCommand(QWidget *parent, RuntimeContext* context)
     : QDialog(parent), AddCommandBase(context)
@@ -23,7 +24,7 @@ AddPointDifferenceCommand::~AddPointDifferenceCommand()
 void AddPointDifferenceCommand::ConstructCommandObject()
 {
     const auto target_point = m_runtime_context->GetObjectByName(ui->pointInput->text());
-    if (target_point == nullptr)
+    if (target_point == nullptr || !AssertType<PointCommand>(target_point))
     {
         QMessageBox::warning(this, "Incorrect input", "Given point is not exists");
         return;

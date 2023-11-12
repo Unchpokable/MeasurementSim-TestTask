@@ -49,7 +49,7 @@ QString PlaneCommand::ToString()
 
     out << "$PLANE(ID::" << GetName().toStdString() << ", " << m_base_points[0]->GetName().toStdString()
         << ", " << m_base_points[1]->GetName().toStdString()
-        << ", " << m_base_points[1]->GetName().toStdString() << ")\n";
+        << ", " << m_base_points[2]->GetName().toStdString() << ")\n";
 
     return QString::fromUtf8(out.str());
 }
@@ -62,8 +62,8 @@ QString PlaneCommand::ToPrettyString()
     QString out {};
     out.append("Plane object\n");
     out.append("based on: " + dynamic_cast<CommandBase*>(m_base_points[0])->ToPrettyString() + "\n");
-    out.append(dynamic_cast<CommandBase*>(m_base_points[0])->ToPrettyString() + "\n");
-    out.append(dynamic_cast<CommandBase*>(m_base_points[0])->ToPrettyString() + "\n");
+    out.append(dynamic_cast<CommandBase*>(m_base_points[1])->ToPrettyString() + "\n");
+    out.append(dynamic_cast<CommandBase*>(m_base_points[2])->ToPrettyString() + "\n");
 
     out.append("Nominal: " + Plane3dToString(m_nominal_plane_params));
     out.append("Actual: " + Plane3dToString(m_plane_params) + "\n\n");

@@ -11,7 +11,7 @@ void MoveCommand::Execute(const std::vector<double>& args)
 
     const Point3d new_position(args[0], args[1], args[2]);
     machine->SetPosition(new_position);
-
+    target_position = args;
     std::stringstream cb {};
     cb << "MOVED TO " << machine->GetProbePosition() << "\n";
     Emit(this);
@@ -19,10 +19,12 @@ void MoveCommand::Execute(const std::vector<double>& args)
 
 QString MoveCommand::ToString()
 {
-    std::stringstream out {};
-    auto probe = m_context->GetMeasureMachine()->GetProbePosition();
+    if(target_position.size() != 3)
+        return QString("Invalid object");
 
-    out << "$MOVE(" << probe.x() << "," << probe.y() << "," << probe.z() << ")\n";
+    std::stringstream out {};
+
+    out << "$MOVE(" << target_position[0] << "," << target_position[1] << "," << target_position[2] << ")\n";
 
     return QString::fromUtf8(out.str().c_str());
 }

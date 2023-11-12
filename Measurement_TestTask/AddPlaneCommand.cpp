@@ -1,9 +1,10 @@
 #include "AddPlaneCommand.h"
 #include <QString>
 #include <QMessageBox>
-
+#include "TypeCheck.h"
 #include "DefaultCallbacks.h"
 #include "PlaneCommand.h"
+#include "PointCommand.h"
 
 AddPlaneCommand::AddPlaneCommand(QWidget *parent, RuntimeContext* context)
     : QDialog(parent), AddCommandBase(context)
@@ -20,7 +21,8 @@ AddPlaneCommand::~AddPlaneCommand()
     delete ui;
 }
 
-void AddPlaneCommand::ConstructCommandObject() {
+void AddPlaneCommand::ConstructCommandObject()
+{
     const auto id = ui->objectIdInput->text();
 
     if(id.size() == 0) {
@@ -33,7 +35,7 @@ void AddPlaneCommand::ConstructCommandObject() {
     const std::vector<double> dummy {};
 
     const auto point1 = m_runtime_context->GetObjectByName(ui->point1Input->text());
-    if (point1 == nullptr)
+    if (point1 == nullptr || !AssertType<PointCommand>(point1))
     {
         QMessageBox::warning(this, QString("Warning"),
             QString("No object named" + ui->point1Input->text() + "found in context"));
@@ -41,7 +43,7 @@ void AddPlaneCommand::ConstructCommandObject() {
     }
 
     const auto point2 = m_runtime_context->GetObjectByName(ui->point2Input->text());
-    if (point2 == nullptr)
+    if (point2 == nullptr || !AssertType<PointCommand>(point2))
     {
         QMessageBox::warning(this, QString("Warning"),
             QString("No object named " + ui->point2Input->text() + " found in context"));
@@ -49,7 +51,7 @@ void AddPlaneCommand::ConstructCommandObject() {
     }
 
     const auto point3 = m_runtime_context->GetObjectByName(ui->point3Input->text());
-    if(point3 == nullptr) 
+    if(point3 == nullptr || !AssertType<PointCommand>(point3))
     {
         QMessageBox::warning(this, QString("Warning"),
             QString("No object named " + ui->point3Input->text() + " found in context"));

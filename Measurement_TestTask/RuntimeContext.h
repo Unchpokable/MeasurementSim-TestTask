@@ -4,9 +4,6 @@
 #include "ContextObject.h"
 #include "MeasureMachine.h"
 
-class RuntimeContext;
-
-using ContextOperationCallback = std::function<void(RuntimeContext*, QString)>;
 
 class RuntimeContext
 {
@@ -54,8 +51,9 @@ public:
     }
 
 
-    bool RemoveObject(const QString& object_name, const ContextOperationCallback& callback = nullptr);
-    bool AddObject(ContextObject* object, const ContextOperationCallback& callback = nullptr);
+    bool RemoveObject(const QString& object_name) noexcept;
+    bool RemoveObject(std::size_t position) noexcept;
+    bool AddObject(ContextObject* object) noexcept;
     const ContextObject* GetObjectByName(const QString& object_name) const noexcept;
     ContextObject* GetObjectByIndex(std::size_t index) const noexcept;
     std::shared_ptr<std::vector<ContextObject*>> GetObjectsOfType(ContextObjectType type) const noexcept;
@@ -63,6 +61,8 @@ public:
     const MeasureMachine* GetMeasureMachine() const noexcept;
     std::shared_ptr<std::vector<ContextObject*>> GetObjectDependencies(const QString& object_name) const noexcept;
     bool BindDependencies(ContextObject* root, const std::vector<ContextObject*>& deps) const noexcept;
+    bool ReplaceObject(std::size_t position, ContextObject* new_object) noexcept;
+    bool InsertObject(std::size_t position, ContextObject* new_object) noexcept;
 
 private:
     RuntimeContext(const Eigen::Vector3d& machine_initial_position)

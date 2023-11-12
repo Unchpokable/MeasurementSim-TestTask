@@ -247,13 +247,11 @@ void UMeasure::OnDeleteAction()
     const auto index = ui->programView->currentIndex();
     const auto row = index.row();
 
+    m_commands_list->removeObject(row);
     if (!m_interpreter->RemoveCommand(row))
     {
         QMessageBox::warning(this, "Error!", "Unable to remove selected command");
-        return;
     }
-
-    m_commands_list->removeObject(row);
 }
 
 void UMeasure::OnReplaceAction(ContextObjectType type)
@@ -262,6 +260,8 @@ void UMeasure::OnReplaceAction(ContextObjectType type)
     const auto row = index.row();
 
     const auto command = GetCommandByType(type);
+    if(command == nullptr)
+        return;
     command->Execute();
     if (!m_interpreter->ReplaceCommand(command, row))
     {
@@ -312,15 +312,17 @@ void UMeasure::AddInsertActionToMenu(QMenu* menu, const QString& title, ContextO
 void UMeasure::InsertNewCommandBefore(ContextObjectType type)
 {
     const auto index = ui->programView->currentIndex();
-    int row = 0;
-    if (index.row() > 0)
-    {
-        row = index.row() - 1;
-    }
+    int row = index.row();
 
     const auto command = GetCommandByType(type);
+    if(command == nullptr)
+        return;
     command->Execute();
-    m_interpreter->InsertCommand(row, command);
+    if (!m_interpreter->InsertCommand(row, command))
+    {
+        QMessageBox::warning(this, "Error!", "Unable to insert command");
+        return;
+    }
     m_commands_list->insertObject(row, command);
 }
 
@@ -335,9 +337,15 @@ void UMeasure::InsertNewCommandAfter(ContextObjectType type)
     }
 
     const auto command = GetCommandByType(type);
-
+    if(command == nullptr)
+        return;
     command->Execute();
-    m_interpreter->InsertCommand(row, command);
+
+    if (!m_interpreter->InsertCommand(row, command))
+    {
+        QMessageBox::warning(this, "Error!", "Unable to insert command");
+        return;
+    }
     m_commands_list->insertObject(row, command);
 }
 

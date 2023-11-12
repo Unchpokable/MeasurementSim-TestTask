@@ -83,5 +83,5 @@ std::string PointCommand::NormalToString(Brackets brackets)
 
 bool PointCommand::Register()
 {
-    return m_context->AddObject(this, OnRuntimeContextCallback);
+    return m_context->AddObject(this);
 }

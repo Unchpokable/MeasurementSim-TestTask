@@ -36,15 +36,16 @@ void CommandListModel::replaceObject(qsizetype index, BoundCommand* object)
 {
     if(index < 0 || index >= m_commands.size())
         return;
+    beginInsertRows(QModelIndex(), 0, m_commands.size());
     m_commands.replace(index, object);
+    endInsertRows();
 }
-
 
 void CommandListModel::removeObject(qsizetype index)
 {
     if(index < 0 || index >= m_commands.size())
         return;
-    beginRemoveRows(QModelIndex(), index, index);
+    beginRemoveRows(QModelIndex(), 0, m_commands.size()-1);
     m_commands.remove(index);
     endRemoveRows();
 }
@@ -54,7 +55,7 @@ void CommandListModel::insertObject(qsizetype index, BoundCommand* object)
     if(index < 0 || index >= m_commands.size())
         return;
 
-    beginInsertRows(QModelIndex(), index, index);
+    beginInsertRows(QModelIndex(), 0, m_commands.size());
     m_commands.insert(index, object);
     endInsertRows();
 }

@@ -29,7 +29,7 @@ RuntimeContext::~RuntimeContext() {
     delete m_context_objects;
 }
 
-bool RuntimeContext::RemoveObject(const QString& object_name, const ContextOperationCallback& callback)
+bool RuntimeContext::RemoveObject(const QString& object_name) noexcept
 {
     
     const auto where = std::find_if(m_context_objects->begin(),
@@ -39,24 +39,34 @@ bool RuntimeContext::RemoveObject(const QString& object_name, const ContextOpera
     });
 
     if(where != m_context_objects->end())
-        m_context_objects->erase(where);
-
-    else
     {
-        if (callback != nullptr)
-            callback(this, QString("Unable to remove object named " + object_name + ", because there is no object called that"));
-        return false;
+        m_context_objects->erase(where);
+        return true;
     }
 
+    return false;
+}
+
+bool RuntimeContext::RemoveObject(std::size_t position) noexcept
+{
+    if(position < 0 || position >= m_context_objects->size())
+        return false;
+
+    const auto it = m_context_objects->begin();
+    const auto pos = it + position;
+
+    if(pos >= m_context_objects->end()) 
+        return false;
+
+    m_context_objects->erase(it + position);
     return true;
 }
 
-bool RuntimeContext::AddObject(ContextObject* object, const ContextOperationCallback& callback)
+
+bool RuntimeContext::AddObject(ContextObject* object) noexcept
 {
     if (object == nullptr)
     {
-        if (callback != nullptr)
-            callback(this, QString("Unable to add nullptr value to context"));
         return false;
     }
 
@@ -67,8 +77,6 @@ bool RuntimeContext::AddObject(ContextObject* object, const ContextOperationCall
                 return ctx->GetName() == object->GetName();
         }) != m_context_objects->end())
     {
-        if (callback != nullptr)
-            callback(this, QString("Unable to add object named " + object->GetName() + ", because this object already added to context or this object has the same name with other different object"));
         return false;
     }
 
@@ -161,4 +169,30 @@ bool RuntimeContext::BindDependencies(ContextObject* root, const std::vector<Con
 
     return true;
 }
+
+bool RuntimeContext::ReplaceObject(std::size_t position, ContextObject* new_object) noexcept
+{
+    if(position < 0 || position >= m_context_objects->size())
+        return false;
+
+    if(new_object == nullptr)
+        return false;
+
+    m_context_objects->at(position) = new_object;
+    return true;
+}
+
+bool RuntimeContext::InsertObject(std::size_t position, ContextObject* new_object) noexcept
+{
+    if(position < 0 || position >= m_context_objects->size())
+        return false;
+
+    if(new_object == nullptr)
+        return false;
+
+    const auto it = m_context_objects->begin();
+    m_context_objects->insert(it + position, new_object);
+    return true;
+}
+
 

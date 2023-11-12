@@ -49,8 +49,13 @@ void CommandInterpreter::AddCommand(BoundCommand* command)
 
     const auto& deps = command->GetDependencies();
     if (!deps.empty())
+    {
         if (!BindDependencies(ctx, deps))
+        {
+            m_runtime_context->RemoveObject(ctx->GetName());
             return;
+        }
+    }
 
     m_commands->push_back(command);
     InvalidateSharedIterators();
@@ -61,26 +66,28 @@ bool CommandInterpreter::ReplaceCommand(BoundCommand* new_command, std::size_t p
     if(position < 0 || position > m_commands->size())
         return false;
 
-    auto current_command = m_runtime_context->GetObjectByIndex(position);
+    const auto old_command = m_runtime_context->GetObjectByIndex(position);
 
-    if(current_command == nullptr)
+    if(old_command == nullptr)
         return false;
 
-    // Memory-safe, huh?
-    auto ctx = dynamic_cast<ContextObject*>(new_command->GetCommandObject());
-    *current_command = std::move(*ctx);
-
+    const auto ctx = dynamic_cast<ContextObject*>(new_command->GetCommandObject());
+    m_runtime_context->ReplaceObject(position, ctx);
 
     const auto& deps = new_command->GetDependencies();
     if(!deps.empty())
+    {
         if(!BindDependencies(ctx, deps))
+        {
+            m_runtime_context->ReplaceObject(position, old_command);
             return false;
+        }
+    }
 
-    const auto it = m_commands->begin();
+    const auto where = m_commands->begin() + position;
     const auto ptr = m_commands->at(position);
-    m_commands->erase(it + position);
     delete ptr;
-    m_commands->insert(it, new_command);
+    *where = new_command;
     InvalidateSharedIterators();
 
     return true;
@@ -96,6 +103,7 @@ bool CommandInterpreter::RemoveCommand(std::size_t where)
     const auto ptr = m_commands->at(where);
     m_commands->erase(it + where);
     delete ptr;
+    m_runtime_context->RemoveObject(where);
     InvalidateSharedIterators();
     return true;
 }
@@ -107,8 +115,14 @@ bool CommandInterpreter::InsertCommand(std::size_t where, BoundCommand* object)
     if(where < 0 || where >= m_commands->size() || it + where >= m_commands->end())
         return false;
 
-    m_commands->insert(it + where, object);
+    const auto& deps = object->GetDependencies();
+    const auto ctx = dynamic_cast<ContextObject*>(object->GetCommandObject());
+    if(!deps.empty())
+        if(!BindDependencies(ctx, deps))
+            return false;
 
+    m_commands->insert(it + where, object);
+    m_runtime_context->InsertObject(where, dynamic_cast<ContextObject*>(object->GetCommandObject()));
     InvalidateSharedIterators();
     return true;
 }
@@ -121,18 +135,12 @@ bool CommandInterpreter::AddToContext(CommandBase* who)
     if(contextObj == nullptr)
         throw std::invalid_argument("Invalid parameter: Given object is not ContextObject pointer");
 
-    return m_runtime_context->AddObject(contextObj, OnRuntimeContextCallback);
+    return m_runtime_context->AddObject(contextObj);
 }
 
 bool CommandInterpreter::BindDependencies(ContextObject* root, const std::vector<ContextObject*>& deps)
 {
-    const bool deps_bound = m_runtime_context->BindDependencies(root, deps);
-    if(!deps_bound) 
-    {
-        m_runtime_context->RemoveObject(root->GetName(), OnRuntimeContextCallback);
-        return false;
-    }
-    return true;
+    return m_runtime_context->BindDependencies(root, deps);
 }
 
 std::shared_ptr<CommandsIterWrapper> CommandInterpreter::GetCommandsIterator() const noexcept

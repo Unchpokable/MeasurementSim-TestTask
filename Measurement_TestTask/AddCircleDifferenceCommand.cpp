@@ -4,6 +4,7 @@
 
 #include "Formats.h"
 #include "ReportCircleCommand.h"
+#include "TypeCheck.h"
 
 AddCircleDifferenceCommand::AddCircleDifferenceCommand(QWidget *parent, RuntimeContext* context)
     : QDialog(parent), AddCommandBase(context)
@@ -25,7 +26,7 @@ void AddCircleDifferenceCommand::ConstructCommandObject()
 {
     const auto target_circle = m_runtime_context->GetObjectByName(ui->circleInput->text());
 
-    if (target_circle == nullptr)
+    if (target_circle == nullptr || !AssertType<CircleCommand>(target_circle))
     {
         QMessageBox::warning(this, "Incorrect input", "Given circle does not exists");
         return;

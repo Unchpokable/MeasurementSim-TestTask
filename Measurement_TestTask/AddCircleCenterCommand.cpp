@@ -4,6 +4,7 @@
 #include "CircleCommand.h"
 #include "DefaultCallbacks.h"
 #include "PointCommand.h"
+#include "TypeCheck.h"
 
 
 AddCircleCenterCommand::AddCircleCenterCommand(QWidget *parent, RuntimeContext* context)
@@ -34,7 +35,7 @@ void AddCircleCenterCommand::ConstructCommandObject()
 
     const auto target_circle = m_runtime_context->GetObjectByName(ui->targetCircleInput->text());
 
-    if(target_circle == nullptr)
+    if(target_circle == nullptr || !AssertType<CircleCommand>(target_circle))
     {
         QMessageBox::warning(this, QString("Invalid input"), QString("Selected circle is not exists"));
         return;
@@ -42,7 +43,7 @@ void AddCircleCenterCommand::ConstructCommandObject()
 
     const auto result_point = new PointCommand(m_runtime_context, obj_id);
 
-    if(!m_runtime_context->AddObject(result_point, OnRuntimeContextCallback))
+    if(!m_runtime_context->AddObject(result_point))
     {
         QMessageBox::warning(this, QString("Invalid input"), QString("Can not add object to context"));
         return;

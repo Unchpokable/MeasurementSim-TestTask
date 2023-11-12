@@ -9,7 +9,6 @@ public:
     MoveCommand(RuntimeContext* context, QString name) : ContextObject(name, ci_move)
     {
         m_context = context;
-        SetType(ci_move);
     }
     ~MoveCommand() override
     {
@@ -21,5 +20,6 @@ public:
 
 private:
     RuntimeContext* m_context;
+    std::vector<double> target_position { 0, 0, 0 };
 };
 
