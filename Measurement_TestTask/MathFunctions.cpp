@@ -15,21 +15,35 @@ Plane3d PlaneFromPoints(const Point3d& pt1, const Point3d& pt2, const Point3d& p
     return Plane3d { a, b, c, d, normal };
 }
 
-Circle3d CircleFromPoints(const Point3d& pt1, const Point3d& pt2, const Point3d& pt3)
+Circle3d CircleFromPoints(const Point3d& p1, const Point3d& p2, const Point3d& p3)
 {
-    const auto vec1 = pt2 - pt1;
-    const auto vec2 = pt3 - pt1;
+    Circle3d circle;
 
-    const auto normal = vec1.cross(vec2).normalized();
+    const Eigen::Vector3d t = p2 - p1;
+    const Eigen::Vector3d u = p3 - p1;
+    const Eigen::Vector3d v = p3 - p2;
 
-    Point3d center {};
-    const auto pt_sum = pt1 + pt2 + pt3;
+    // triangle normal
+    const Eigen::Vector3d w = t.cross(u);
+    const double wsl = w.squaredNorm();
+    if(wsl < 1.0e-14) {
+        circle.Normal = Eigen::Vector3d::Zero();
+        circle.CenterPoint = Eigen::Vector3d::Zero();
+        circle.Radius = 0.0;
+        return circle;
+    }
 
-    center.x() = pt_sum.x() / 3.0;
-    center.y() = pt_sum.y() / 3.0;
-    center.z() = pt_sum.z() / 3.0;
-    const auto radius = Eigen::Vector3d(pt1.x() - center.x(), pt1.y() - center.y(), pt1.z() - center.z()).norm();
-    return { normal, center, radius };
+    // helpers
+    const double iwsl2 = 1.0 / (2.0 * wsl);
+    const double tt = t.squaredNorm();
+    const double uu = u.squaredNorm();
+
+    // result circle
+    circle.CenterPoint = p1 + (u * tt * (u.dot(v)) - t * uu * (t.dot(v))) * iwsl2;
+    circle.Radius = sqrt(tt * uu * (v.squaredNorm()) * iwsl2 * 0.5);
+    circle.Normal = w / sqrt(wsl);
+
+    return circle;
 }
 
 Point3d Project(const Point3d& point, const Plane3d& plane)
